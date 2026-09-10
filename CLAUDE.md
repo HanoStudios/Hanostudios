@@ -198,7 +198,9 @@ repo (and still serves as the page's `og:image` and schema `image`) so the
 `.slide-board` gallery can be restored in one step. `.slide.slide-board` stays in
 the CSS for that reason; it is currently unused. `.case-board-mask` covers
 Milanote's own badge along the foot, sized by `--board-mask-h` /
-`--board-mask-inset` so it can be moved in one line.
+`--board-mask-inset` so it can be moved in one line. The board centres on the
+page like a static gallery, capped at 980px so a 16/10 panel across the full
+content width does not tower over the copy either side.
 
 `.slide-board` needs `.slide.slide-board` specificity — see above; that trap
 still applies if you put the still back.
@@ -244,7 +246,9 @@ video play/pause for any number of them per page.
 
 **A gallery whose slides all fit is centred, and main.js has to measure that.**
 `measure()` sets `.is-static` when `scrollWidth <= clientWidth + 1`; the CSS then
-drops the track's right-edge bleed and centres the slides, hides the prev/next
+drops the track's right-edge bleed, **collapses the two-track grid to one so the
+slides centre on the page rather than inside the indented copy column** (centring
+in column 2 alone lands them right of the page's centre line), hides the prev/next
 buttons and dots (dead controls with nothing to scroll — hidden *by name*, since
 the sound toggle shares `.gallery-arrows`), and centres the foot. It cannot be a
 media query: it depends on how wide the slides resolve, and a pair that fits on a

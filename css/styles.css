@@ -1392,16 +1392,16 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   object-fit:contain;
 }
 
-/* Milanote mood board embed. Laid out on the same two-track grid as .gallery
-   so it lines up with the copy column, but without the bleed: this one is a
-   framed panel, not a strip that runs off the edge. */
+/* Milanote mood board embed. A framed panel, not a strip that runs off the
+   edge — so no bleed, and it centres on the page like a static gallery. */
 .case-board{
   display:grid;
-  grid-template-columns:var(--col) minmax(0, 1fr);
-  gap:clamp(18px,2.6vw,40px);
+  /* Same reasoning as .gallery.is-static: a framed panel is media, not copy, so
+     it centres on the page rather than sitting in the indented column. */
+  grid-template-columns:1fr;
   margin:0 0 clamp(30px,3.6vw,52px);
 }
-.case-board > *{ grid-column:2; }
+.case-board > *{ grid-column:1; }
 
 /* The bordered frame. Aspect ratio rather than a fixed height, so the board
    keeps its shape down to a phone; 16/10 is close to the board's own 1.91:1
@@ -1410,7 +1410,10 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   --board-mask-h:46px;      /* how much of the foot the mask covers */
   --board-mask-inset:0px;   /* nudge it off the bottom edge if the badge floats */
   position:relative;
-  width:100%;
+  /* Capped rather than full-bleed: the row is now the whole content width, and
+     a 16/10 panel across all of it would tower over the copy either side. */
+  width:min(100%, 980px);
+  margin-inline:auto;
   aspect-ratio:16 / 10;
   border:1px solid rgba(255,255,255,.14);
   border-radius:4px;
@@ -1437,6 +1440,16 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
    with nothing to scroll it only strands the slides at the left of the copy
    column, which is what left Kalshi's single clip and Bybit's pair of socials
    hard against the text margin with the column empty beside them. */
+.gallery.is-static{
+  /* Centre on the PAGE, not in the copy column. Column 1 is the document's
+     indent margin, so centring inside column 2 alone lands everything right of
+     the page's own centre line — which is what left Kalshi's clip and Bybit's
+     pair sitting off to the right. A gallery with nothing to scroll has no
+     reason to respect the indent: it collapses to a single full-width track
+     and centres in it. The indented .case-sec copy around it is untouched. */
+  grid-template-columns:1fr;
+}
+.gallery.is-static > *{ grid-column:1; }
 .gallery.is-static .gallery-track{
   margin-right:0;
   justify-content:center;
