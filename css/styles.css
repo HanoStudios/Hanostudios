@@ -430,6 +430,12 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 }
 .ht-gap{ flex:0 0 .22em; }
 .ht-a,.ht-b{ display:inline-block; will-change:transform, filter, opacity; }
+/* main.js drops the blur from the divide tween at this width, so promoting a
+   filter layer here only costs memory and forces a filter path that is never
+   used. Keep transform/opacity, which are what actually animate. */
+@media (max-width:900px){
+  .ht-a,.ht-b{ will-change:transform, opacity; }
+}
 
 
 /* ============================================================
@@ -1839,6 +1845,18 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   .client-grid li:nth-child(n+6){ border-bottom:1px solid var(--ink-08); }
   .client-grid li:nth-child(n+9){ border-bottom:0; }
   .showcase{ grid-template-columns:1fr; align-items:start; }
+  /* Dim the neighbours, don't blur them. A blur filter re-rasterises its layer
+     on every frame it is composited, and these four layers each wrap a <video>
+     inside a pinned, scrubbed carousel — so a phone was re-blurring four video
+     surfaces on every scroll frame of the whole showcase section. That was the
+     single most expensive thing on the page during a scroll. One phone is
+     centred at these widths with the neighbours mostly off-screen anyway, so
+     the brightness drop alone carries the focus. Desktop keeps the blur.
+     Same 900px cut-over as the hero's divide blur in main.js. */
+  .phone{ filter:brightness(.42); }
+  .phone:hover{ filter:brightness(.72); }
+  .phone.is-active,
+  .phone.is-active:hover{ filter:brightness(1); }
   /* Was 40px. Frame 198's gap from the arrows down to the phones is much
      tighter than that — measured against the reference at roughly half this. */
   .showcase-stage{ margin-top:20px; }
@@ -1926,6 +1944,12 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
      one class alone loses to `.js .sc-line > span` whatever the order. */
   .js .sc-line > span{ opacity:1; transform:none; }
   .hero-square{ display:none; }
+  /* Two full-viewport layers under a 38px/46px blur on infinite alternating
+     drifts. The global animation-duration override above stops the drift, but
+     an animation that still exists keeps the blurred layers promoted — none of
+     this is wanted for a visitor who asked for no motion. */
+  .hero-glow{ animation:none; }
+  .hero-glow::after{ animation:none; }
   /* No pin runs in this mode, so the pin's scroll-room margin would be a real
      black gap. Same specificity as the rule that sets it; later in file wins. */
   .js:not(.no-gsap) .hero{ margin-bottom:0; }

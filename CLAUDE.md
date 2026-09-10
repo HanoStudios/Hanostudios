@@ -495,6 +495,43 @@ meta and schema on several pages. The Kalshi case study deliberately still says
 135,000+ — that describes the audience size *at the time of that partnership*, so
 don't "fix" it to today's number.
 
+## Mobile scroll performance
+
+Reported as "laggy, sometimes stuck" on iPhone and Android. The pins are not the
+problem and must not be removed — the per-frame cost inside them was. **The rule:
+never composite a `filter: blur()` on anything that moves during a scroll.** A
+blur re-rasterises its layer on every frame it is composited, so a blur on a
+scrubbed element pays that cost on every scroll frame.
+
+Two were doing exactly that, both now cut over at 900px:
+
+- **`.phone` inactive slides** carried `brightness(.42) blur(4px)` — four blurred
+  layers, each wrapping a `<video>`, inside the pinned scrub. Four video surfaces
+  re-blurred per scroll frame for the length of the showcase. Below 901px they
+  dim without blurring; desktop keeps the blur.
+- **The hero divide tween** scrubbed `.ht-a`/`.ht-b` from `blur(0px)` to
+  `blur(9px)` — a per-frame text re-raster on the first thing anyone scrolls.
+  `main.js` now omits the `filter` key entirely below 901px rather than tweening
+  it to zero, because `blur(0px)` still puts the element on a filter path. The
+  words still travel ±92% and fade out. CSS drops `filter` from their
+  `will-change` at the same breakpoint — keep the two thresholds in step.
+
+Also: work-card videos used `rootMargin: '200px'`, which on the mobile vertical
+stack pulled three clips into decode at once mid-scroll; it is `0px` below 701px.
+And `.hero-glow`'s two blurred full-viewport layers now have `animation:none`
+under reduced motion — the global duration override stopped the drift but left
+the animation in place, which keeps the layers promoted.
+
+**Still outstanding: several clips are encoded well above the site's own
+convention** (`scale=-2:960`, i.e. 960 on the short-ish edge). `work/hano-crypto/
+trumps-planned-crash.mp4` and `war-against-china.mp4` are 1080x1920 at 9.1MB and
+8.4MB, and `work/kalshi/xrp-bank.mp4` is 1080x1920 at 5.9MB — double the
+convention in each dimension, four times the pixels to decode. The landing
+page's `assets/video/works/*.mp4` are 1706x960 (6.9MB for the five) for cards
+that render a few hundred px wide. Re-encoding is the biggest remaining win.
+**Do not touch the four Bybit Card films** — their quality was already the
+subject of a complaint and a revert (see 1030778 / 8d348ce).
+
 ## Conventions
 
 - `prefers-reduced-motion` is respected; preserve it in anything new.

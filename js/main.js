@@ -499,7 +499,12 @@
         if (entry.isIntersecting) start(video);
         else if (!video.paused) video.pause();
       });
-    }, { rootMargin: '200px' });
+      // 200px of lead-in is cheap on the desktop strip, where the cards are
+      // side by side and one or two qualify at a time. Below 701px the same
+      // strip is a vertical stack of full-width cards, so that margin pulled
+      // three 1706x960 clips into decode at once while the visitor was
+      // scrolling. Start them as they actually arrive there.
+    }, { rootMargin: window.matchMedia('(min-width: 701px)').matches ? '200px' : '0px' });
 
     videos.forEach(video => io.observe(video));
   })();
@@ -1076,6 +1081,26 @@
     // from here on, but the first refresh may land after the first paint.
     hero.style.zIndex = '3';
 
+    // The two words blur as they part — but a scrubbed blur re-rasterises the
+    // text layer on EVERY scroll frame of the pin, and this is the very first
+    // thing a visitor scrolls. On a phone that alone made the hero stutter. The
+    // filter key is omitted entirely below 901px rather than tweened to 0: a
+    // blur(0px) still puts the element on a filter path. The words already
+    // travel 92% apart and fade to opacity 0, so at phone size the blur was
+    // carrying almost none of the effect for most of the cost. CSS drops
+    // `filter` from their will-change to match.
+    const wantBlur = window.matchMedia('(min-width: 901px)').matches;
+    const divideFrom = () => {
+      const v = { xPercent: 0, y: 0, opacity: 1 };
+      if (wantBlur) v.filter = 'blur(0px)';
+      return v;
+    };
+    const divideTo = (xPercent, y) => {
+      const v = { xPercent: xPercent, y: y, opacity: 0, ease: 'none', duration: 0.36 };
+      if (wantBlur) v.filter = 'blur(9px)';
+      return v;
+    };
+
     heroTL
       .to('.hero-tagline', { opacity: 0, y: -40, ease: 'none', duration: 0.24 }, 0)
       // The top bar deliberately does NOT fade: frames 218 and 220 both still
@@ -1091,12 +1116,8 @@
       // on a SINGLE line as they divide ("O ◆ ST") — so each word also travels
       // half the stack offset toward the shared centre line. Inline (desktop)
       // the offset is zero and the y tween is a no-op.
-      .fromTo('.ht-a',
-        { xPercent: 0, y: 0, filter: 'blur(0px)', opacity: 1 },
-        { xPercent: -92, y: mergeY, filter: 'blur(9px)', opacity: 0, ease: 'none', duration: 0.36 }, 0.26)
-      .fromTo('.ht-b',
-        { xPercent: 0, y: 0, filter: 'blur(0px)', opacity: 1 },
-        { xPercent: 92, y: () => -mergeY(), filter: 'blur(9px)', opacity: 0, ease: 'none', duration: 0.36 }, 0.26)
+      .fromTo('.ht-a', divideFrom(), divideTo(-92, mergeY), 0.26)
+      .fromTo('.ht-b', divideFrom(), divideTo(92, () => -mergeY()), 0.26)
       // Square appears between them as they go, then takes the screen. Scale is
       // one continuous tween so it never dips; rotation runs alongside.
       .fromTo(heroSquare,
