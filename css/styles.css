@@ -514,53 +514,31 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 
 .clients{ margin-top:clamp(24px,4vw,60px); }
 
-/* 5 x 2 for the ten supplied marks, as the Figma draws it. */
+/* Frame 226: 6 x 3 filled tiles split by a 2px gap, every mark in white.
+   Tiles are 246x85 in the frame, so the aspect ratio carries that at any width
+   and the row height no longer needs its own clamp. */
 .client-grid{
   display:grid;
-  grid-template-columns:repeat(5,1fr);
+  grid-template-columns:repeat(6,1fr);
+  gap:2px;
   margin-top:18px;
-  border:1px solid var(--ink-08);
 }
 .client-grid li{
   display:grid;
   place-items:center;
-  /* ~8.6% of the grid's width per row, measured off the reference (105px tall
-     rows on a 1225px-wide grid at a 1332 viewport). 7vw gave 93px and the wall
-     read shallower than the frame. */
-  min-height:clamp(78px,7.9vw,112px);
-  padding:12px;
-  font-size:clamp(12px,1.15vw,17px);
-  font-weight:600;
-  letter-spacing:-.01em;
-  text-align:center;
-  color:var(--ink-40);
-  border-right:1px solid var(--ink-08);
-  border-bottom:1px solid var(--ink-08);
-  transition:color .3s ease, background .3s ease;
+  aspect-ratio:246/85;
+  background:var(--ink-08);
+  transition:background .3s ease;
 }
-.client-grid li:hover{ color:var(--frost); background:var(--ink-08); }
+.client-grid li:hover{ background:var(--ink-14); }
+/* Each mark's width is set per logo (--w, a % of the tile, measured off the
+   frame) rather than by a shared cap. The set mixes long wordmarks (Levels
+   Socials at 64%) with tall badges (Unilever at 21%), and the designer has
+   balanced them by eye — any single width or height cap flattens that. */
 .client-grid img{
-  width:auto;
-  /* Capped on BOTH axes, because the real set mixes wide wordmarks with square
-     roundels. Width alone let a roundel's own aspect squash it to ~39px of
-     visible art inside a width-limited box; the height cap is what actually
-     governs those, and the width cap governs the wordmarks.
-     Sized to the Figma, where a mark occupies roughly 45% of its cell's width
-     and ~22% of its height. At 168/52 they filled ~67% of the cell and the
-     wall read heavy and cramped next to the reference. */
-  max-width:min(100%,112px);
-  max-height:clamp(26px,2.4vw,34px);
+  width:calc(var(--w, 40) * 1%);
   height:auto;
-  /* Full strength. These are the clients' own marks in their own brand colours,
-     and the Figma draws them at full saturation — Kalshi's green, Maxy's orange,
-     Abstract's green all read as themselves. Dimming (.42, then .62) was carried
-     over from the flat grey text placeholders and muted every one of them. */
-  opacity:1;
 }
-/* 5 across, 2 down: no right edge on the 5th of each row, no bottom edge on
-   the last row. The outer border on .client-grid supplies the frame. */
-.client-grid li:nth-child(5n){ border-right:0; }
-.client-grid li:nth-child(n+6){ border-bottom:0; }
 
 /* ============================================================
    WORKS — horizontal scroll
@@ -945,18 +923,17 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   overflow:hidden;              /* keeps content inside the rounded corners */
 }
 
+/* Frame 239: three cards across the full width, the stats as one row beneath. */
 .team-grid{
   display:grid;
-  grid-template-columns:1.15fr 1fr;
-  gap:clamp(30px,5vw,80px);
-  align-items:start;
+  gap:clamp(30px,4vw,60px);
   margin-top:clamp(28px,4vw,50px);
 }
-.team-cards{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,1.8vw,26px); }
+.team-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,1.8vw,26px); }
 
 .member{ border:1px solid var(--ink-14); padding:14px; }
 .member-photo{
-  aspect-ratio:4/5;
+  aspect-ratio:13/10;           /* frame 239's photo box, 772x594 */
   background:#161616;
   background-size:cover;
   background-position:center;
@@ -965,14 +942,17 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 .member strong{ display:block; font-size:clamp(13px,1.1vw,16px); font-weight:600; }
 .member span{ display:block; margin-top:3px; font-size:clamp(11px,.9vw,13px); color:var(--ink-40); }
 
+.stats{ display:grid; grid-template-columns:repeat(3,1fr); }
 .stats div{
   display:flex;
   align-items:baseline;
   justify-content:space-between;
   gap:20px;
-  padding:clamp(14px,1.8vw,24px) 0;
-  border-bottom:1px solid var(--ink-14);
+  padding:clamp(6px,.8vw,10px) clamp(14px,1.8vw,26px);
+  border-left:1px solid var(--ink-14);
 }
+.stats div:first-child{ border-left:0; padding-left:0; }
+.stats div:last-child{ padding-right:0; }
 .stats dt{
   font-size:clamp(30px,3.6vw,50px);
   font-weight:300;
@@ -1179,8 +1159,11 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   color:var(--ink-60);
 }
 
-/* Section headings sit above their own copy, inside the copy column. */
-.case-sec h2{
+/* Section headings sit above their own copy, inside the copy column. The
+   Smardex frame opens on "Overview" inside the header row itself, so the intro
+   column takes the same heading style. */
+.case-sec h2,
+.case-intro h2{
   margin-bottom:12px;
   font-size:clamp(19px,1.9vw,27px);
   font-weight:500;
@@ -1197,6 +1180,21 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 .case-sec p + p{ margin-top:14px; }
 .case-row em,
 .case-sec em{ font-style:italic; color:var(--ink-90); }
+/* An inline link in running copy (Smardex's "Now Everything."). The global
+   `a{text-decoration:none}` would leave it reading as plain text. */
+.case-inline{
+  color:var(--ink-90);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  transition:color .25s ease;
+}
+.case-inline:hover{ color:var(--frost); }
+
+/* Standalone full-width pieces stacked in the copy column (the Smardex key
+   visual and facts table) — no carousel, as the frame draws them. */
+.case-figs img{ width:100%; height:auto; border-radius:4px; }
+.case-figs figure + figure{ margin-top:clamp(12px,1.6vw,22px); }
+
 /* The italic standfirst under "Bybit Card Campaign" in the frame. */
 .case-note{
   font-style:italic;
@@ -1370,6 +1368,10 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
    reads far smaller than a landscape still beside it. It gets its own, taller
    cap to land at comparable visual weight rather than a stamp in the column. */
 .slide-tall{ height:clamp(460px,44vw,680px); }
+/* Square marks (Smardex's product icons) are 388px exports and the frame draws
+   them well short of the landscape stills — the shared height would blow them
+   up past their own size. */
+.slide-square{ height:clamp(200px,24vw,340px); }
 /* The mood board is a wide 1340x712 sheet: capped by width, not height, or a
    height cap would push it far past the copy column. Both declarations have to
    out-specify `.slide img{width:auto;height:100%}`, which is a later rule of
@@ -1526,6 +1528,18 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   }
   .slide.slide-tall video,
   .slide.slide-tall img{ width:100%; height:auto; }
+  /* A still drawn at the slide's full height is wider than 84vw for any
+     landscape image (400px tall -> ~710px wide), and the slide's overflow:hidden
+     cut its right side off — the type on a campaign still went first. Stills
+     know their own size, so the box fits the image instead. Videos are left on
+     the fixed box: with preload="none" they report no size until loaded. */
+  .slide:has(> img){ height:auto; }
+  .slide > img{
+    width:auto;
+    height:auto;
+    max-width:84vw;
+    max-height:min(56vh,400px);
+  }
 }
 
 /* ============================================================
@@ -1848,15 +1862,10 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 @media (max-width:900px){
   .services,
   .faq{ grid-template-columns:1fr; }
-  .team-grid{ grid-template-columns:1fr; }
   .footer-top{ grid-template-columns:1fr; }
   /* 2 across, 5 down. Each override has to undo the desktop rule it replaces,
      since these are the same specificity — hence the explicit re-adds. */
-  .client-grid{ grid-template-columns:repeat(2,1fr); }
-  .client-grid li:nth-child(5n){ border-right:1px solid var(--ink-08); }
-  .client-grid li:nth-child(2n){ border-right:0; }
-  .client-grid li:nth-child(n+6){ border-bottom:1px solid var(--ink-08); }
-  .client-grid li:nth-child(n+9){ border-bottom:0; }
+  .client-grid{ grid-template-columns:repeat(3,1fr); }
   .showcase{ grid-template-columns:1fr; align-items:start; }
   /* Dim the neighbours, don't blur them. A blur filter re-rasterises its layer
      on every frame it is composited, and these four layers each wrap a <video>
@@ -1929,7 +1938,17 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
      centre; scroll-snap does the rest. */
   .phone{ width:62vw; }
   .showcase-stage{ padding:30px 19vw; gap:6vw; margin-right:calc(var(--pad) * -1); }
+  /* Two across on a phone; at the frame's percentages the smaller marks would
+     shrink to ~50px, so they are scaled up a quarter and held under 80%. */
+  .client-grid{ grid-template-columns:repeat(2,1fr); }
+  .client-grid img{ width:min(calc(var(--w, 40) * 1.25%), 80%); }
   .team-cards{ grid-template-columns:1fr; }
+  /* The stats row turns back into a stacked list — three labels side by side
+     do not fit a phone. */
+  .stats{ grid-template-columns:1fr; }
+  .stats div,
+  .stats div:first-child,
+  .stats div:last-child{ padding:14px 0; border-left:0; border-bottom:1px solid var(--ink-14); }
   .cta{ min-height:64svh; }
   /* "HANO STUDIOS" is ~7em wide; at 390px with 20px side pads the biggest size
      that still shows the whole wordmark is ~12.5vw. 17vw cropped it to
