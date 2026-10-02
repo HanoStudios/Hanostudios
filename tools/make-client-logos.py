@@ -78,45 +78,6 @@ JOBS = [
     # against Void Black, so the background is flooded away.
     ("Levels Socials.png",        "levels-socials.png",    "dropbg"),
     ("Virtune.png",               "virtune.png",           "keep"),
-    # Supplied only as the white Figma export. The case study draws it in the
-    # client's green, sampled off their own artwork (the "FUTURE OF DEFI" type).
-    ("Smardex.png",               "smardex.png",           "tint:3CF8B0"),
-]
-
-# The client wall (frame 226) draws every mark in plain white, but the files
-# above are also the work-card titles and case-study logos, which keep the
-# clients' own colours. So the wall gets its own white set in clients/grid/,
-# built from the same sources. A mode may be a tuple, applied in order.
-GRID = "grid"
-GRID_JOBS = [
-    ("Kalshi.png",                    "kalshi.png",            "whiten"),
-    ("Algorand.png",                  "algorand.png",          "whiten"),
-    # Pale letters with dark outlines: whitening the alpha would fill the
-    # outlines in and leave a blob, so this one is greyscaled instead.
-    ("Pudgy Penguin Wordmark v2.png", "pudgy-penguins.png",    "mono"),
-    ("Levels Socials.png",            "levels-socials.png",    ("dropbg", "whiten")),
-    ("SWJ.png",                       "swj.png",               "keep"),
-    ("PwC.png",                       "pwc.png",               "keep"),
-    ("Unilever.png",                  "unilever.png",          "keep"),
-    ("Garmin.png",                    "garmin.png",            "keep"),
-    ("Black Bananas.png",             "black-bananas.png",     "keep"),
-    ("Abstract Wordmark.png",         "abstract.png",          "whiten"),
-    ("Smardex.png",                   "smardex.png",           "keep"),
-    ("Humanity Protocol.png",         "humanity-protocol.png", "whiten"),
-    ("Virtune.png",                   "virtune.png",           "whiten"),
-    ("Onara Wordmark.png",            "onara.png",             "whiten"),
-    ("Trayler.png",                   "trayler.png",           "keep"),
-    # White banner with black lettering on it — the black is the type, keep it.
-    ("Ben & Jerrys.png",              "ben-jerrys.png",        "keep"),
-]
-# SWJ, PwC, Unilever, Garmin, Black Bananas, Smardex, Trayler and Ben & Jerry's
-# were exported from the Figma already white, so they only exist in the grid set.
-
-# Vector marks for the wall: the colour copies with their one coloured fill
-# swapped to white. (source in clients/, output in clients/grid/, from, to)
-GRID_SVGS = [
-    ("bybit.svg", "#F6A500", "#FFFFFF"),   # the orange "I"
-    ("maxy.svg",  "#F26B21", "#FFFFFF"),
 ]
 
 # Bybit and Maxy stay vector — see the README. Both needed a fill fixed for a
@@ -252,27 +213,6 @@ def drop_background(w, h, px, tol=38):
 
 def recolour(w, h, px, mode):
     """Apply the polarity fix. See module docstring."""
-    if isinstance(mode, tuple):
-        for m in mode:
-            px = recolour(w, h, px, m)
-        return px
-    if mode == "mono":
-        # Greyscale, then stretch so anything mid-grey or lighter reads as white
-        # and dark detail stays dark.
-        out = bytearray(px)
-        for i in range(0, len(out), 4):
-            g = (out[i] * 3 + out[i + 1] * 6 + out[i + 2]) // 10
-            g = max(0, min(255, (g - 50) * 255 // 90))
-            out[i] = out[i + 1] = out[i + 2] = g
-        return out
-    if mode.startswith("tint:"):
-        # Keep the alpha (the shape), paint every pixel one flat colour.
-        hx = mode[5:]
-        r, g, b = int(hx[0:2], 16), int(hx[2:4], 16), int(hx[4:6], 16)
-        out = bytearray(px)
-        for i in range(0, len(out), 4):
-            out[i], out[i + 1], out[i + 2] = r, g, b
-        return out
     if mode == "keep":
         return px
     if mode == "dropbg":
@@ -334,14 +274,14 @@ def resize(w, h, px, tw, th):
     return out
 
 
-def build(src_name, out_name, mode, sub=""):
+def build(src_name, out_name, mode):
     src = os.path.join(SRC, src_name)
     if not os.path.exists(src):
         print("  MISSING  %s" % src_name)
         return False
 
     os.makedirs(TMP, exist_ok=True)
-    norm = os.path.join(TMP, sub + out_name.replace(".png", "") + "-src.png")
+    norm = os.path.join(TMP, out_name.replace(".png", "") + "-src.png")
     # sips normalises format and pre-downscales; some sources are 4501px square
     # and decoding those in pure Python is needlessly slow.
     subprocess.run(["sips", "-s", "format", "png", "-Z", "1000", src, "--out", norm],
@@ -357,8 +297,8 @@ def build(src_name, out_name, mode, sub=""):
     tw, th = max(1, int(round(w * scale))), max(1, int(round(h * scale)))
     art = resize(w, h, px, tw, th) if (tw, th) != (w, h) else px
 
-    write_png(os.path.join(OUT, sub, out_name), tw, th, art)
-    print("  %-22s %4dx%-4d -> %3dx%-3d  (%s)" % (os.path.join(sub, out_name), w, h, tw, th, mode))
+    write_png(os.path.join(OUT, out_name), tw, th, art)
+    print("  %-22s %4dx%-4d -> %3dx%-3d  (%s)" % (out_name, w, h, tw, th, mode))
     return True
 
 
@@ -369,18 +309,6 @@ def main():
     print("building client logos into assets/img/clients/")
     ok = sum(build(*j) for j in JOBS)
     print("%d/%d written" % (ok, len(JOBS)))
-
-    print("building the white client-wall set into assets/img/clients/grid/")
-    os.makedirs(os.path.join(OUT, GRID), exist_ok=True)
-    ok = sum(build(*j, sub=GRID) for j in GRID_JOBS)
-    for name, frm, to in GRID_SVGS:
-        svg = open(os.path.join(OUT, name)).read()
-        if frm not in svg:
-            sys.exit("%s no longer contains %s — check the fill by hand" % (name, frm))
-        open(os.path.join(OUT, GRID, name), "w").write(svg.replace(frm, to))
-        print("  %-22s %s -> %s" % (os.path.join(GRID, name), frm, to))
-        ok += 1
-    print("%d/%d written" % (ok, len(GRID_JOBS) + len(GRID_SVGS)))
 
 
 if __name__ == "__main__":

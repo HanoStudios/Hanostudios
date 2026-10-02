@@ -301,30 +301,20 @@
          Stating them in prose too is what lets a search engine or an answer
          engine attribute the work — "who has Hano Studios worked with". -->
     <p class="eyebrow">Worked with 100+ clients &mdash; including Bybit, Kalshi, Algorand, Abstract and Pudgy Penguins</p>
-    <!-- Real client marks, in the white set frame 226 draws: clients/grid/ is
-         built by tools/make-client-logos.py (Bybit and Maxy are white copies of
-         the vector colour marks). The colour originals one folder up stay in use
-         on the work cards and case studies. --w is the mark's width as a % of its
-         tile, measured off the frame, so each sits at the Figma's optical weight. -->
+    <!-- Real client marks. The PNGs are built from `Client Logos/` by
+         tools/make-client-logos.py — see that file for the per-logo polarity
+         handling. Bybit and Maxy are vector and are not rebuilt by it. -->
     <ul class="client-grid">
-      <li><img src="assets/img/clients/grid/bybit.svg" alt="Bybit" style="--w:31" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/kalshi.png" alt="Kalshi" style="--w:33" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/algorand.png" alt="Algorand" style="--w:40" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/pudgy-penguins.png" alt="Pudgy Penguins" style="--w:28" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/levels-socials.png" alt="Levels Socials" style="--w:64" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/swj.png" alt="SWJ" style="--w:29" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/pwc.png" alt="PwC" style="--w:26" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/unilever.png" alt="Unilever" style="--w:21" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/garmin.png" alt="Garmin" style="--w:39" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/black-bananas.png" alt="Black Bananas" style="--w:30" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/abstract.png" alt="Abstract" style="--w:54" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/smardex.png" alt="SmarDex" style="--w:50" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/humanity-protocol.png" alt="Humanity Protocol" style="--w:47" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/virtune.png" alt="Virtune" style="--w:47" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/onara.png" alt="Onara" style="--w:42" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/maxy.svg" alt="Maxy" style="--w:43" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/trayler.png" alt="Trayler" style="--w:43" loading="lazy"></li>
-      <li><img src="assets/img/clients/grid/ben-jerrys.png" alt="Ben &amp; Jerry&rsquo;s" style="--w:47" loading="lazy"></li>
+      <li><img src="assets/img/clients/bybit.svg" alt="Bybit" loading="lazy"></li>
+      <li><img src="assets/img/clients/kalshi.png" alt="Kalshi" loading="lazy"></li>
+      <li><img src="assets/img/clients/algorand.png" alt="Algorand" loading="lazy"></li>
+      <li><img src="assets/img/clients/pudgy-penguins.png" alt="Pudgy Penguins" loading="lazy"></li>
+      <li><img src="assets/img/clients/levels-socials.png" alt="Levels Socials" loading="lazy"></li>
+      <li><img src="assets/img/clients/humanity-protocol.png" alt="Humanity Protocol" loading="lazy"></li>
+      <li><img src="assets/img/clients/virtune.png" alt="Virtune" loading="lazy"></li>
+      <li><img src="assets/img/clients/onara.png" alt="Onara" loading="lazy"></li>
+      <li><img src="assets/img/clients/maxy.svg" alt="Maxy" loading="lazy"></li>
+      <li><img src="assets/img/clients/abstract.png" alt="Abstract" loading="lazy"></li>
     </ul>
   </div>
 </section>
@@ -415,43 +405,6 @@
             <span class="tag">Full-Service Marketing</span>
           </div>
         </a>
-      </article>
-
-      <article class="work-card">
-        <a class="work-link" href="work/smardex.html">
-          <div class="work-img" data-tone="green" style="background-image:url('assets/img/works/smardex.jpg')">
-            <video class="work-video" playsinline muted loop preload="none"
-                   data-src="assets/video/works/smardex.mp4" aria-hidden="true"></video>
-          </div>
-          <div class="work-meta">
-            <h3 class="sr-only">Smardex</h3>
-            <img class="work-logo" src="assets/img/clients/grid/smardex.png" alt="Smardex" loading="lazy">
-            <p>Building the visual system behind a DeFi brand, from product interfaces to content, motion, and community.</p>
-            <span class="tag">Brand Design</span>
-          </div>
-        </a>
-      </article>
-
-      <article class="work-card">
-        <!-- No case study yet, so no link — wrap it in <a class="work-link"> when the page exists. -->
-        <div class="work-img" data-tone="steel" style="background-image:url('assets/img/works/ben-jerrys.jpg')"></div>
-        <div class="work-meta">
-          <h3 class="sr-only">Ben &amp; Jerry&rsquo;s</h3>
-          <img class="work-logo" src="assets/img/clients/grid/ben-jerrys.png" alt="Ben &amp; Jerry&rsquo;s" loading="lazy">
-          <p>Capturing Free Cone Day in Rotterdam and turning a local brand moment into visual content built for global marketing.</p>
-          <span class="tag">Global Marketing</span>
-        </div>
-      </article>
-
-      <article class="work-card">
-        <!-- No case study yet, so no link — wrap it in <a class="work-link"> when the page exists. -->
-        <div class="work-img" data-tone="steel" style="background-image:url('assets/img/works/trayler.jpg')"></div>
-        <div class="work-meta">
-          <h3 class="sr-only">Trayler</h3>
-          <img class="work-logo" src="assets/img/clients/grid/trayler.png" alt="Trayler" loading="lazy">
-          <p>Redesigning the digital experience for a moving billboard platform built to make brands impossible to miss.</p>
-          <span class="tag">Creative Direction</span>
-        </div>
       </article>
     </div>
   </div>
@@ -576,13 +529,6 @@
         <figcaption>
           <strong>Hannah Hess</strong>
           <span>Co-Founder &amp; Head of Operations</span>
-        </figcaption>
-      </figure>
-      <figure class="member">
-        <div class="member-photo" data-tone="steel" style="background-image:url('assets/img/team/tim.jpg')"></div>
-        <figcaption>
-          <strong>Tim</strong>
-          <span>Co-Founder &amp; Creative Director</span>
         </figcaption>
       </figure>
     </div>

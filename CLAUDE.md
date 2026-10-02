@@ -98,20 +98,8 @@ overwrite the file at the same path. No code changes needed.**
 | `assets/img/works/` | 5 | 4 real posters (`.jpg`) + 1 placeholder (`.svg`) — see below |
 | `assets/img/showcase/` | 5 | posters, real frames of the clips |
 | `assets/img/services/` | 6 | 800×800 (1:1) — currently unreferenced, see below |
-| `assets/img/team/` | 3 | 13:10 landscape — **real photos, not placeholder** |
+| `assets/img/team/` | 2 | 800×1000 (4:5) — **real photos, not placeholder** |
 | `assets/img/og-image.jpg` | 1 | 1200×630 |
-
-**Smardex, Ben & Jerry's and Trayler are appended after the original five
-cards**, with stills cut from Figma exports
-(`assets/img/works/{smardex,ben-jerrys,trayler}.jpg`). Smardex links to
-`work/smardex.html` and plays `assets/video/works/smardex.mp4` (from
-`SMARDEX Showcase 8s.mp4`, usual settings, `-an` — the master has no audio
-stream); its still is the launch visual from the Figma card, not a clip frame.
-Ben & Jerry's and Trayler have no clip and no case study yet, so no
-`<a class="work-link">`. Their title marks are the white
-`clients/grid/` versions, the only artwork supplied for them. The Figma's
-works frames (228-229) carry older copy, order and text titles; on request the
-five existing cards were left exactly as they were.
 
 **Four of the five work cards play their mockup clip, not a still.** Bybit,
 Kalshi, Hano Crypto and Maxy each hold a `<video class="work-video" data-src="...">`
@@ -143,18 +131,13 @@ bug in working code. On the landing page proper, `scrollIntoView` on a card is
 also the wrong move: the strip is pinned and travels horizontally with *page*
 scroll, so a card's own scroll position never brings it into view.
 
-**`assets/img/team/` is real, not placeholder.** Frame 239 puts three cards
-across the full width with the stats as one row beneath, and draws each photo in
-a 772x594 box — hence `.member-photo{aspect-ratio:13/10}`. Johannes and Hannah are
-cropped from the HD originals in `Team Photos/` (`JohannesHD.JPG`,
-`HannahHD.JPG`) to 800x615, framed head-to-chest the way 239 draws them:
-Johannes `crop=820:631:335:255`, Hannah `crop=960:738:0:390`. His original is
-*landscape* 1280x961 with him small and off-centre right, so a plain resize
-reintroduces the old "zoomed out" complaint — redo the framing by hand.
-Tim (`tim.jpg`, surname not supplied — the card says just "Tim", as 239 does)
-has no HD original: it is cut from the Figma export of frame 30 at
-`crop=772:594:40:40`, i.e. exactly 239's photo box, and is only 772px wide.
-Overwrite it if a proper original turns up.
+**`assets/img/team/` is real, not placeholder.** Built from the HD originals in
+`Team Photos/` (`JohannesHD.JPG`, `HannahHD.JPG`). Both needed cropping to 4:5
+before resizing, and Johannes's especially: his original is *landscape* 1280x961
+with him small and off-centre right, which is what "zoomed out" meant. It is
+cropped to 769x961 around him, then resized. Hannah's is 960x1280 portrait and
+only loses 80px off the bottom. Re-cropping means redoing that framing by hand —
+a plain resize of the landscape original will reintroduce the problem.
 
 **`assets/img/clients/` is real, not placeholder.** Every mark is the client's own
 artwork, and the same files are reused as the works-card titles (`.work-logo`),
@@ -163,17 +146,6 @@ with a visually-hidden `<h3>` kept beside each so the cards still have headings.
 hand-edit the output. They are tightly cropped, *not* padded to a fixed canvas: the set
 mixes wide wordmarks with square roundels, and the CSS caps both width and height so the
 two kinds land at the same optical weight.
-
-**The client wall uses its own white set, `assets/img/clients/grid/`.** Frame
-226 draws all eighteen marks in plain white on `--ink-08` tiles (6x3, 2px gap,
-246:85 tiles), but the colour files in `clients/` are also the work-card titles
-and case-study logos, which keep brand colour. So the tool builds the grid set
-separately (`GRID_JOBS` / `GRID_SVGS`) — don't point the wall back at the colour
-files or the cards at the white ones. Each `<img>` carries `--w`, its width as a
-% of the tile measured off the frame; the designer balanced long wordmarks
-against tall badges by eye and no shared cap reproduces that. SWJ, PwC,
-Unilever, Garmin, Black Bananas, SmarDex, Trayler and Ben & Jerry's were
-exported from Figma already white and exist only in the grid set.
 
 **Bybit and Maxy are `.svg` and are NOT rebuilt by the tool.** Both needed a fill edited
 for a dark ground — Bybit's wordmark was `#15182A`, and Maxy's paths declared no `fill`
@@ -242,26 +214,6 @@ circular, so it carries `.case-logo-round` on the case study and a taller
 dot next to Bybit's or Levels Socials' wide marks.
 Paths are `../` throughout, and the menu's Work/Process/Team/FAQ links point at
 `../index.html#…` so they work from a subdirectory.
-
-**`work/smardex.html` (frame 2147223579)** opens on "Overview" inside the
-header row (so `.case-intro h2` shares the `.case-sec h2` style) with an sr-only
-`<h1>`. Copy is the frame's, verbatim, first person included. It adds
-`.slide-square` for the four 388px product marks and `.case-figs` for the two
-standalone full-width pieces (Second Halving, SDEX vs ENA table). Its logo is
-`clients/smardex.png`, built by the tool's `tint:3CF8B0` mode from the white
-export — the green is sampled off their own artwork. Page images are the 2x
-Figma exports. Shell outside `<article>` is byte-identical to Kalshi's.
-
-**The frame closes on a carousel of @every_thing posts on X; it was built and
-then removed on request** — the page ends on "A long-term creative
-collaboration". Don't re-add X embeds without asking (they would also need
-consent gating and a privacy-policy mention).
-
-**Phone galleries size stills to the image, not a fixed box.** At <=600px a
-landscape still drawn at the 400px slide height was ~710px wide, and the slide's
-`overflow:hidden` cut its right side off on every case study. `.slide:has(> img)`
-now drops to `height:auto` with the img capped at 84vw / min(56vh,400px).
-Videos keep the fixed box: `preload="none"` means no intrinsic size until loaded.
 
 **Frame 181 indents the whole document; it is not a two-column grid.** The left
 column is a margin holding only the client logo and the "Why It Matters" label —
