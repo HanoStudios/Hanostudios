@@ -4,7 +4,7 @@
    module for the handlers beside it and not a public endpoint.
 
    Environment (Vercel > Project > Settings > Environment Variables):
-     META_PIXEL_ID         1282102860523144  (same dataset as the browser)
+     META_PIXEL_ID         1389268022937431  (same dataset as the browser)
      META_CAPI_TOKEN       Events Manager > Settings > Conversions API >
                            Generate access token. SECRET — never in the repo.
      META_TEST_EVENT_CODE  optional, e.g. TEST82007. Routes events to

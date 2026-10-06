@@ -392,7 +392,8 @@ tag in the HTML — it would run before consent.
 
 Three events, in funnel order: **PageView** (on pixel load), **Contact** (click of
 any `[data-calendly]` trigger), **Lead** (Calendly posts `calendly.event_scheduled`
-from its inline iframe). Pixel ID `1282102860523144`.
+from its inline iframe). Pixel ID `1389268022937431` — it replaced
+`1282102860523144` on 2026-10-06 on request.
 
 **Every event goes out twice**, browser (`fbq`) and server (`POST /api/capi` →
 Meta Conversions API), carrying the **same `event_id`** so Meta deduplicates them.
@@ -409,8 +410,8 @@ Set in **Vercel → Settings → Environment Variables** (nothing secret in the 
 
 | Variable | Value |
 |---|---|
-| `META_PIXEL_ID` | `1282102860523144` |
-| `META_CAPI_TOKEN` | Events Manager → Settings → Conversions API → Generate access token |
+| `META_PIXEL_ID` | `1389268022937431` |
+| `META_CAPI_TOKEN` | Events Manager → Settings → Conversions API → Generate access token — **for pixel 1389268022937431**; a token from the old pixel's dataset is refused |
 | `META_TEST_EVENT_CODE` | optional; routes events to Test Events. **Remove after verifying** or nothing counts as live. |
 
 Without the token `/api/capi` returns 501 and the browser leg carries on alone,

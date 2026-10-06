@@ -46,10 +46,12 @@
      from Meta Events Manager; with no ID the marketing loader is a no-op,
      so the switch is honest either way. -------------------------------- */
 
-  /* "HanoAnimations Pixel", from the Hano Animations ad account's Events
-     Manager. Not the test_event_code shown on that page — that one is a
-     temporary debugging token and does not belong in the site. */
-  var META_PIXEL_ID = '1282102860523144';
+  /* Supplied 2026-10-06, replacing the earlier "HanoAnimations Pixel"
+     (1282102860523144). Must match META_PIXEL_ID in Vercel, or the server leg
+     reports to a different dataset and deduplication breaks. Not the
+     test_event_code shown in Events Manager — that one is a temporary
+     debugging token and does not belong in the site. */
+  var META_PIXEL_ID = '1389268022937431';
 
   var loaded = { analytics: false, marketing: false };
 
