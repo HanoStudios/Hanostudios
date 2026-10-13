@@ -21,15 +21,19 @@ const { send } = require('./_meta.js');
 /* Anything not on this list is refused rather than forwarded. An open relay
    into the ad account would let a stranger mint conversions and poison the
    optimisation the campaigns run on. */
-const ALLOWED_EVENTS = new Set(['PageView', 'Contact', 'Lead']);
+const ALLOWED_EVENTS = new Set(['PageView', 'Contact', 'FormStarted', 'Lead']);
 
 function trusted(req) {
   const src = req.headers.origin || req.headers.referer || '';
   if (!src) return false;
   let host;
   try { host = new URL(src).hostname; } catch (err) { return false; }
+  /* hanostudio.xyz (no "s") is the partnership site, which runs this same
+     code; both report to the same pixel. */
   return host === 'hanostudios.xyz' ||
          host.endsWith('.hanostudios.xyz') ||
+         host === 'hanostudio.xyz' ||
+         host.endsWith('.hanostudio.xyz') ||
          host.endsWith('.vercel.app');        /* preview deployments */
 }
 

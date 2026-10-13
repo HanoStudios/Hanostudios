@@ -390,9 +390,15 @@ Both were verified by killing the scripts. Keep them if you refactor.
 `js/consent.js` owns all of it. Nothing tracking-related belongs in a `<script>`
 tag in the HTML — it would run before consent.
 
-Three events, in funnel order: **PageView** (on pixel load), **Contact** (click of
-any `[data-calendly]` trigger), **Lead** (Calendly posts `calendly.event_scheduled`
-from its inline iframe). Pixel ID `1389268022937431` — it replaced
+Four events, in funnel order: **PageView** (on pixel load), **Contact** (click of
+any `[data-calendly]` trigger), **FormStarted** (custom, added 2026-10-13: Calendly
+posts `calendly.date_and_time_selected` when a slot is picked and the name/email
+form appears; once per visit), **Lead** (Calendly posts `calendly.event_scheduled`
+from its inline iframe). FormStarted goes out via `fbq('trackCustom')` — only the
+three standard names use `fbq('track')` — and is on `ALLOWED_EVENTS` in
+`api/capi.js`; a new event needs both. To optimise ads on it, it must first be
+made a custom conversion in Events Manager. `api/capi.js` accepts both
+hanostudios.xyz and hanostudio.xyz (the partnership site runs the same code). Pixel ID `1389268022937431` — it replaced
 `1282102860523144` on 2026-10-06 on request.
 
 **Every event goes out twice**, browser (`fbq`) and server (`POST /api/capi` →

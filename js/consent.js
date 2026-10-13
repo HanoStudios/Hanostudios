@@ -204,6 +204,10 @@
     });
   }
 
+  /* Meta's standard events go through fbq('track'); anything else must use
+     'trackCustom', or the pixel logs it as a malformed standard event. */
+  var STANDARD = { PageView: 1, Contact: 1, Lead: 1 };
+
   function track(name, id) {
     if (!marketingOn) {
       log('skipped', name, '- marketing consent not granted');
@@ -211,7 +215,7 @@
     }
     id = id || uuid();
     if (typeof window.fbq === 'function') {
-      window.fbq('track', name, {}, { eventID: id });
+      window.fbq(STANDARD[name] ? 'track' : 'trackCustom', name, {}, { eventID: id });
       log('browser', name, id);
     } else {
       log('browser', name, 'skipped - fbq missing');
@@ -270,6 +274,7 @@
   }
 
   var leadSent = false;
+  var formStartedSent = false;
   window.addEventListener('message', function (e) {
     /* Only trust Calendly's own frames. */
     if (!fromCalendly(e.origin)) return;
@@ -284,6 +289,17 @@
     /* Every Calendly event, so a failed booking test shows what DID arrive
        instead of leaving "nothing happened" as the only evidence. */
     log('calendly message:', data.event);
+
+    /* FormStarted (custom): the visitor has picked a slot and Calendly is
+       now showing the name/email form — the step between Contact (opened
+       the booking window) and Lead (booked). Once per visit, like Lead, so
+       hopping between time slots cannot inflate it. */
+    if (data.event === 'calendly.date_and_time_selected') {
+      if (formStartedSent) return;
+      formStartedSent = true;
+      track('FormStarted');
+      return;
+    }
 
     if (data.event !== 'calendly.event_scheduled') return;
     /* Calendly can emit the event more than once for a single booking;
