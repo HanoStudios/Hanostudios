@@ -501,6 +501,12 @@ main.js builds the inline widget into `#bookEmbed` on load, sharing
 as opening the popup. Paths are `../`, which resolve correctly whether Vercel
 serves it as `/book` or `/book/`. The partnership site has the same page.
 
+**On phones (<=600px) /book opens straight onto the calendar:** Calendly's intro
+card is hidden with `&hide_event_type_details=1` on the widget URL (it ignores
+the `hideEventTypeDetails` pageSettings flag), its two facts are restated as
+`.book-meta` pills ("30 min", "Video call" — keep in step with the Calendly
+event), and `.book-embed` takes the rest of the screen, capped at 616px.
+
 **The site is exactly the five pages the product designer drew — do not add
 more.** Six SEO service pages and a "More work" cross-link strip were built and
 then removed on request: the design is owned by the product designer and pages
