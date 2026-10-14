@@ -491,6 +491,16 @@ The tool substitutes its JSON-LD with a lambda rather than a replacement string 
 agency does, the verified numbers, and links to every page. Update it whenever a
 headline metric changes — it is the file most likely to be quoted verbatim.
 
+**`/book` (`book/index.html`) is the one exception, added 2026-10-14 at the
+client's request (Hannah) as a direct link for ads.** It is the booking popup as
+a page: built from `work/index.html`'s shell minus the modal and the CTA section
+(the calendar is the page), with the menu/footer "Contact" pointing at `#book`.
+main.js builds the inline widget into `#bookEmbed` on load, sharing
+`CAL_PAGE_SETTINGS` with the modal. consent.js sends **Contact** when the path is
+/book, from the marketing loader so it waits for consent — the same funnel step
+as opening the popup. Paths are `../`, which resolve correctly whether Vercel
+serves it as `/book` or `/book/`. The partnership site has the same page.
+
 **The site is exactly the five pages the product designer drew — do not add
 more.** Six SEO service pages and a "More work" cross-link strip were built and
 then removed on request: the design is owned by the product designer and pages

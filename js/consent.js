@@ -86,6 +86,10 @@
       /* Sent through track() like the others, so it carries an eventID and
          is mirrored to the Conversions API. */
       track('PageView');
+      /* /book is the booking popup as a page, linked from ads. Arriving there
+         is the same funnel step as opening the popup, so it counts as Contact.
+         Here rather than on load so it waits for consent, and fires once. */
+      if (/^\/book(\/(index\.html)?)?$/.test(window.location.pathname)) track('Contact');
     }
   };
 

@@ -778,6 +778,51 @@
 
   /* ---------------- Calendly booking modal ---------------- */
 
+  // The colour params on data-url are honoured by Calendly's own page but NOT
+  // by the inline widget, which reads them here — pass both and the embed
+  // matches the site instead of rendering white. Shared by the modal and the
+  // /book page.
+  const CAL_PAGE_SETTINGS = {
+    backgroundColor: '0A0A0A',
+    textColor: 'FFFFFF',
+    primaryColor: '8B32F7',
+    hideGdprBanner: true,
+    hideEventTypeDetails: false,
+    hideLandingPageDetails: false
+  };
+
+  /* ---------------- Booking page (/book) ---------------- */
+  // The modal's calendar as a page of its own, for ads to link to directly.
+  // Built on load, not on intent: arriving here is the intent.
+  const bookEmbed = document.getElementById('bookEmbed');
+  if (bookEmbed && bookEmbed.dataset.url) {
+    const bookFallback = () => {
+      const url = bookEmbed.dataset.url.split('?')[0];
+      bookEmbed.innerHTML =
+        '<div class="cal-fallback"><p>The booking widget could not load.</p>' +
+        '<a href="' + url + '" target="_blank" rel="noopener">Open the booking page &rarr;</a>' +
+        '<a href="mailto:hello@hano.studios">Or email hello@hano.studios</a></div>';
+    };
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(css);
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    script.onload = () => {
+      if (!window.Calendly) return bookFallback();
+      window.Calendly.initInlineWidget({
+        url: bookEmbed.dataset.url,
+        parentElement: bookEmbed,
+        pageSettings: CAL_PAGE_SETTINGS
+      });
+    };
+    script.onerror = bookFallback;     // blocked CDN, ad blocker, offline
+    document.head.appendChild(script);
+    if (window.plausible) window.plausible('Booking opened');
+  }
+
   const calModal = document.getElementById('calModal');
 
   if (calModal) {
@@ -824,18 +869,6 @@
         pageSettings: CAL_PAGE_SETTINGS
       });
     }
-
-    // The colour params on data-url are honoured by Calendly's own page but NOT
-    // by the inline widget, which reads them here — pass both and the embed
-    // matches the site instead of rendering white.
-    const CAL_PAGE_SETTINGS = {
-      backgroundColor: '0A0A0A',
-      textColor: 'FFFFFF',
-      primaryColor: '8B32F7',
-      hideGdprBanner: true,
-      hideEventTypeDetails: false,
-      hideLandingPageDetails: false
-    };
 
     function loadCalendly() {
       if (requested) return;

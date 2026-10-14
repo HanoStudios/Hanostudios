@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Book a Discovery Call | Hano Studios</title>
+<meta name="description" content="Book a free discovery call with Hano Studios. Pick a time that works for you and we'll talk through your project.">
+
+<meta property="og:title" content="Book a discovery call — Hano Studios">
+<meta property="og:description" content="Pick a time that works for you and we'll talk through your project.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.hanostudios.xyz/book/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta property="og:url" content="https://www.hanostudios.xyz/book/">
+<meta property="og:site_name" content="Hano Studios">
+<meta name="twitter:site" content="@HanoStudioss">
+<meta property="og:image" content="https://www.hanostudios.xyz/assets/img/og-image.jpg">
+
+<!-- Paths are ../ because this page sits in book/. Same set as the root page.
+     ../ also resolves correctly when Vercel serves it as /book without the slash. -->
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="../assets/favicon/favicon-48x48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<meta name="theme-color" content="#0A0A0A">
+
+<!-- The booking widget is a paid conversion path; warming DNS/TLS here
+     removes ~200-300ms from the first open. -->
+<link rel="preconnect" href="https://assets.calendly.com" crossorigin>
+<link rel="preconnect" href="https://calendly.com" crossorigin>
+<link rel="dns-prefetch" href="https://assets.calendly.com">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Aleo:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../css/styles.css">
+
+<!-- Loads before any tag: it decides what may run. -->
+<script src="../js/consent.js"></script>
+
+<script>
+  window.plausible = window.plausible || function () {
+    (window.plausible.q = window.plausible.q || []).push(arguments);
+  };
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      document.documentElement.classList.add('no-gsap');
+    }
+  });
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.hanostudios.xyz/book/#page",
+      "name": "Book a discovery call \u2014 Hano Studios",
+      "url": "https://www.hanostudios.xyz/book/",
+      "description": "Book a discovery call with Hano Studios.",
+      "isPartOf": {
+        "@id": "https://www.hanostudios.xyz/#website"
+      },
+      "about": {
+        "@id": "https://www.hanostudios.xyz/#organization"
+      },
+      "potentialAction": {
+        "@type": "ScheduleAction",
+        "target": "https://calendly.com/hanostudios/discovery"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body class="case-body">
+
+<!-- ============ MENU BUTTON + OVERLAY ============ -->
+<button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+  <span></span><span></span>
+</button>
+
+<nav class="menu-overlay" id="menuOverlay" aria-hidden="true" inert>
+  <img class="menu-mark" src="../assets/logo/logomark_white.png" alt="" aria-hidden="true">
+
+  <div class="menu-inner">
+    <ul class="menu-links">
+      <li><a href="../index.html#works">Work</a></li>
+      <li><a href="../index.html#team">Team</a></li>
+      <li><a href="../index.html#faq">FAQ</a></li>
+      <li><a href="#book">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="menu-foot">
+    <span class="menu-copy">&copy; 2026 Hano Studios</span>
+    <div class="menu-social">
+      <a href="https://www.instagram.com/hano.studios/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://x.com/HanoStudioss" target="_blank" rel="noopener">X / Twitter</a>
+      <a href="https://www.linkedin.com/company/hano-studios/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ ALL WORKS ============ -->
+<!-- The booking popup as a page of its own, so ads can link straight to it
+     (hanostudios.xyz/book). Same Calendly event and colours as the popup;
+     main.js builds the widget into #bookEmbed on load rather than on intent,
+     since arriving here IS the intent. js/consent.js counts the visit as
+     Contact, the event a click on any popup trigger sends. -->
+<main class="book" id="book">
+  <a class="case-home" href="../index.html" aria-label="Hano Studios — back to home">
+    <img src="../assets/logo/logomark_white.png" alt="">
+  </a>
+
+  <header class="book-head">
+    <h1 class="h-split"><strong>Book a</strong> discovery call</h1>
+    <p class="sub"><strong>Pick a time that works for you,</strong> and we'll talk through your project.</p>
+  </header>
+
+  <div class="book-embed" id="bookEmbed" data-url="https://calendly.com/hanostudios/discovery?hide_gdpr_banner=1&background_color=0A0A0A&text_color=FFFFFF&primary_color=8B32F7">
+    <noscript>
+      <p class="cal-fallback">
+        <a href="https://calendly.com/hanostudios/discovery" target="_blank" rel="noopener">
+          Open the booking page &rarr;</a>
+      </p>
+    </noscript>
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-top">
+    <p class="footer-lead">A complete creative<br>partner for brands ready<br>to launch, scale, and lead.</p>
+
+    <div class="footer-cols">
+      <div>
+        <p class="col-head">Socials</p>
+        <a href="https://www.instagram.com/hano.studios/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://x.com/HanoStudioss" target="_blank" rel="noopener">X / Twitter</a>
+        <a href="https://www.linkedin.com/company/hano-studios/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div>
+        <p class="col-head">Explore</p>
+        <a href="../index.html#top">Home</a>
+        <a href="../index.html#works">Work</a>
+      </div>
+      <div>
+        <p class="col-head">About</p>
+        <a href="../index.html#team">Team</a>
+        <a href="../index.html#faq">FAQ</a>
+        <a href="#book">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-mark" aria-hidden="true">HANO STUDIOS</div>
+
+  <div class="footer-base">
+    <span>&copy; 2026 Hano Animations. All rights reserved.</span>
+    <div>
+      <a href="../legal.html">Legal</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="#" data-cookie-settings>Cookie Settings</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="../js/main.js"></script>
+<!-- ============ COOKIE CONSENT ============ -->
+<!-- Injected by js/consent.js, which also holds the tag loaders: nothing
+     non-essential runs until a choice is stored. -->
+<div class="cc" id="cookieConsent" role="dialog" aria-modal="true" aria-labelledby="ccTitle" hidden>
+  <div class="cc-card" tabindex="-1">
+
+    <div class="cc-notice">
+      <p class="cc-title" id="ccTitle">Cookie Preferences</p>
+      <p class="cc-text">We use essential cookies to run this site, and optional ones to understand how it is used. You choose what we may set. Read our <a href="../privacy.html">Privacy Policy</a>.</p>
+      <button class="cc-link" type="button" data-cc="manage">Manage Preferences</button>
+    </div>
+    <div class="cc-actions">
+      <button class="cc-btn" type="button" data-cc="reject">Reject All Optional</button>
+      <button class="cc-btn cc-btn-primary" type="button" data-cc="accept">Save &amp; Accept</button>
+    </div>
+
+    <div class="cc-panel">
+      <div class="cc-head">
+        <button class="cc-back" type="button" data-cc="back">&larr; Back</button>
+      </div>
+
+      <div class="cc-groups">
+        <div class="cc-group">
+          <div class="cc-group-head">
+            <span class="cc-group-name">Essential Cookies</span>
+            <span class="cc-always">Always Active</span>
+          </div>
+          <p class="cc-group-desc">These cookies are necessary for the website to function and cannot be switched off. They are usually set in response to actions you take, such as setting your privacy preferences or filling in forms.</p>
+        </div>
+
+        <div class="cc-group">
+          <div class="cc-group-head">
+            <span class="cc-group-name">Analytics Cookies</span>
+            <span class="cc-switch">
+              <input type="checkbox" id="ccAnalytics" aria-describedby="ccAnalyticsDesc">
+              <span class="cc-track"></span>
+            </span>
+          </div>
+          <p class="cc-group-desc" id="ccAnalyticsDesc">These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us understand which pages are the most popular and how visitors move around the site.</p>
+        </div>
+
+        <div class="cc-group">
+          <div class="cc-group-head">
+            <span class="cc-group-name">Marketing Cookies</span>
+            <span class="cc-switch">
+              <input type="checkbox" id="ccMarketing" aria-describedby="ccMarketingDesc">
+              <span class="cc-track"></span>
+            </span>
+          </div>
+          <p class="cc-group-desc" id="ccMarketingDesc">These cookies may be set through our site by our advertising partners. They may be used to build a profile of your interests and show you relevant ads on other sites.</p>
+        </div>
+      </div>
+
+      <div class="cc-actions">
+        <button class="cc-btn" type="button" data-cc="reject">Reject All Optional</button>
+        <button class="cc-btn cc-btn-primary" type="button" data-cc="save">Save Preferences</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
