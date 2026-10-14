@@ -812,8 +812,14 @@
     script.async = true;
     script.onload = () => {
       if (!window.Calendly) return bookFallback();
+      // On a phone Calendly stacks its intro card (logo, description, "Show
+      // more") above the calendar, so the calendar starts below the fold.
+      // Our own header already carries the branding and the essentials, so
+      // the phone layout skips straight to the calendar. Calendly ignores
+      // hideEventTypeDetails in pageSettings; the URL parameter is honoured.
+      const phone = window.matchMedia('(max-width:600px)').matches;
       window.Calendly.initInlineWidget({
-        url: bookEmbed.dataset.url,
+        url: bookEmbed.dataset.url + (phone ? '&hide_event_type_details=1' : ''),
         parentElement: bookEmbed,
         pageSettings: CAL_PAGE_SETTINGS
       });

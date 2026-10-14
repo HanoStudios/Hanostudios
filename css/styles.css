@@ -1084,8 +1084,34 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   overflow:hidden;
 }
 .book-embed iframe{ display:block; width:100%; height:100%; border:0; }
+.book-meta{ display:none; }
+/* Phone: the calendar has to be on screen on arrival, no scrolling. A compact
+   header (mark, heading, one line, the two event facts) and the embed takes
+   whatever height is left, so the month view lands fully in the first screen
+   on anything from an iPhone SE up. */
 @media (max-width:600px){
-  .book-embed{ height:max(720px, 88svh); margin:0 calc(var(--pad) * -.5); }
+  .book{ padding-top:64px; padding-bottom:20px; }
+  .book .case-home{ top:18px; }
+  .book-head{ margin-bottom:14px; }
+  .book-head .h-split{ font-size:clamp(28px, 8.4vw, 34px); }
+  .book-head .sub{ margin-top:6px; font-size:13px; }
+  .book-meta{ display:flex; gap:8px; margin-top:12px; }
+  .book-meta span{
+    padding:5px 11px;
+    border:1px solid var(--ink-14);
+    border-radius:999px;
+    font-size:11px;
+    font-weight:500;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-60);
+  }
+  .book-embed{
+    /* Capped at the month view's own height (~610px): past that the box only
+       shows Calendly's dark page background under its white card. */
+    height:clamp(540px, calc(100svh - 228px), 616px);
+    margin:0 calc(var(--pad) * -.5);
+  }
 }
 
 /* ============================================================
