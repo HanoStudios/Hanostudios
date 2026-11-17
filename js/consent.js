@@ -7,6 +7,8 @@
    Adding a tag later means adding it to LOADERS below — never a script
    tag in the HTML, which would fire regardless of choice.
    ============================================================ */
+/* Hano OS visitor counter: cookieless and anonymous (no cookies, nothing stored on the device, no IPs kept), so it runs without consent. */
+(function(){var u='https://work.hanostudios.xyz/api/public/site-hit',h=function(e){try{navigator.sendBeacon(u,JSON.stringify({p:location.pathname,r:document.referrer,e:e}))}catch(x){}};h();document.addEventListener('click',function(v){if(v.target.closest&&v.target.closest('[data-calendly]'))h('calendly_click')},true)})();
 (function () {
   'use strict';
 
