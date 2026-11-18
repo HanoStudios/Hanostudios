@@ -115,7 +115,7 @@
 }
 </script>
 </head>
-<body class="case-body">
+<body class="case-body case-page">
 
 <!-- ============ CALENDLY BOOKING MODAL ============ -->
 <!-- Same modal as the landing page; main.js wires any [data-calendly] trigger.
@@ -167,26 +167,23 @@
 </nav>
 
 <!-- ============ CASE STUDY ============ -->
-<article class="case">
+<article class="case case-study">
 
-  <!-- Logomark links home, as the frame draws it top-left -->
-  <a class="case-home" href="../index.html" aria-label="Hano Studios — back to home">
-    <img src="../assets/logo/logomark_white.png" alt="">
-  </a>
-
-  <!-- Only the logo row and "Why It Matters" are two-track grids; every other
-       section is a .case-sec indented to the copy column. See CLAUDE.md. -->
-  <header class="case-row">
-    <div class="case-brand">
-      <img class="case-logo" src="../assets/img/clients/levels-socials.png" alt="Levels Socials">
-      <p class="case-kicker">Full-Service Marketing</p>
-    </div>
-
-    <div class="case-intro">
-      <h1>From zero marketing to a full CMO mandate.</h1>
-      <p class="case-lead">We started by taking over their social media. Today we run the entire marketing of a copy trading platform, in four languages, across every channel, and inside the product itself.</p>
+  <!-- New case-study template: a banner pairing the client's mark with ours
+       (ours links home), then the whole document in one centred column. -->
+  <header class="case-banner">
+    <p class="case-banner-label">Case Study</p>
+    <div class="case-banner-marks">
+      <img class="case-banner-client" src="../assets/img/clients/levels-socials.png" alt="Levels Socials">
+      <span class="case-banner-x" aria-hidden="true">&times;</span>
+      <a class="case-banner-home" href="../index.html" aria-label="Hano Studios — back to home"><img src="../assets/logo/logo_full_white.png" alt=""></a>
     </div>
   </header>
+
+  <div class="case-intro">
+    <h1>From zero marketing to a full CMO mandate.</h1>
+    <p class="case-lead">We started by taking over their social media. Today we run the entire marketing of a copy trading platform, in four languages, across every channel, and inside the product itself.</p>
+  </div>
 
   <section class="case-sec">
     <h2>Overview</h2>
@@ -225,12 +222,10 @@
     <p>Beyond the digital funnel, we produce the marketing material for Levels' real-life events, build partner briefs and onboarding material, and equip a growing network of affiliates with campaign assets. One visual language, one message, one direction for the whole network.</p>
   </section>
 
-  <section class="case-row case-why">
-    <p class="case-label">Why It Matters</p>
-    <div>
-      <p class="case-why-lead">Levels Socials shows what a full partnership looks like. Not a deliverable, not a campaign, but the entire marketing function of a trading company, run by a team that actually understands trading.</p>
-      <p>When the people making the marketing understand the market, the gap between brand and audience disappears.</p>
-    </div>
+  <section class="case-sec case-why">
+    <h2>Why It Matters</h2>
+    <p class="case-why-lead">Levels Socials shows what a full partnership looks like. Not a deliverable, not a campaign, but the entire marketing function of a trading company, run by a team that actually understands trading.</p>
+    <p>When the people making the marketing understand the market, the gap between brand and audience disappears.</p>
   </section>
 
 
@@ -239,7 +234,7 @@
 <!-- ============ CTA ============ -->
 <section class="cta" id="contact">
   <div class="cta-glow" aria-hidden="true"></div>
-  <h2 class="cta-title">Let's bring your<br>vision to life</h2>
+  <h2 class="cta-title">Let's bring your <br>vision to life</h2>
   <a class="cta-bar" href="#contact" data-calendly>Let's talk</a>
 </section>
 

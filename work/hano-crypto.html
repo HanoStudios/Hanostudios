@@ -115,7 +115,7 @@
 }
 </script>
 </head>
-<body class="case-body">
+<body class="case-body case-page">
 
 <!-- ============ CALENDLY BOOKING MODAL ============ -->
 <!-- Same modal as the landing page; main.js wires any [data-calendly] trigger.
@@ -167,25 +167,23 @@
 </nav>
 
 <!-- ============ CASE STUDY ============ -->
-<article class="case">
+<article class="case case-study">
 
-  <!-- Logomark links home, as the frame draws it top-left -->
-  <a class="case-home" href="../index.html" aria-label="Hano Studios — back to home">
-    <img src="../assets/logo/logomark_white.png" alt="">
-  </a>
-
-  <!-- Only the logo row and "Why It Matters" are two-track grids; every other
-       section is a .case-sec indented to the copy column. See CLAUDE.md. -->
-  <header class="case-row">
-    <div class="case-brand">
-      <img class="case-logo case-logo-round" src="../assets/img/clients/hano-crypto.png" alt="Hano Crypto">
-    </div>
-
-    <div class="case-intro">
-      <h1 class="sr-only">Hano Crypto — 0 to 148,000 followers and 30M+ views</h1>
-      <p class="case-lead">From zero to 148,000 followers. 30 million views. One of the largest crypto communities on Instagram.</p>
+  <!-- New case-study template: a banner pairing the client's mark with ours
+       (ours links home), then the whole document in one centred column. -->
+  <header class="case-banner">
+    <p class="case-banner-label">Case Study</p>
+    <div class="case-banner-marks">
+      <img class="case-banner-client case-banner-round" src="../assets/img/clients/hano-crypto.png" alt="Hano Crypto">
+      <span class="case-banner-x" aria-hidden="true">&times;</span>
+      <a class="case-banner-home" href="../index.html" aria-label="Hano Studios — back to home"><img src="../assets/logo/logo_full_white.png" alt=""></a>
     </div>
   </header>
+
+  <div class="case-intro">
+    <h1 class="sr-only">Hano Crypto — 0 to 148,000 followers and 30M+ views</h1>
+    <p class="case-lead">From zero to 148,000 followers. 30 million views. One of the largest crypto communities on Instagram.</p>
+  </div>
 
   <section class="case-sec">
     <h2>Overview</h2>
@@ -212,18 +210,25 @@
 
   <section class="case-sec case-post">
     <h2>War against China</h2>
-    <p class="case-metrics">8 Million views &middot; 354,000 likes &middot; 6,715 comments &middot; 402,000 shares</p>
   </section>
 
-  <div class="gallery" data-gallery aria-roledescription="carousel" aria-label="War against China">
-    <div class="gallery-track" data-gallery-track>
-      <figure class="slide slide-tall"><video src="../assets/video/work/hano-crypto/war-against-china.mp4" data-audio poster="../assets/img/work/hano-crypto/war-against-china-poster.jpg" muted loop playsinline preload="none" aria-label="War against China — the most viral Hano Crypto video"></video></figure>
+  <!-- New template: clip on the left, engagement and the Instagram link beside it. -->
+  <div class="case-feature">
+    <div class="gallery" data-gallery aria-roledescription="carousel" aria-label="War against China">
+      <div class="gallery-track" data-gallery-track>
+        <figure class="slide slide-tall"><video src="../assets/video/work/hano-crypto/war-against-china.mp4" data-audio poster="../assets/img/work/hano-crypto/war-against-china-poster.jpg" muted loop playsinline preload="none" aria-label="War against China — the most viral Hano Crypto video"></video></figure>
+      </div>
+    </div>
+    <div class="case-feature-copy">
+      <ul class="case-metric-list" aria-label="Engagement">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5C6.5 5 2.7 9.1 1.5 12c1.2 2.9 5 7 10.5 7s9.3-4.1 10.5-7C21.3 9.1 17.5 5 12 5zm0 11a4 4 0 110-8 4 4 0 010 8z"/></svg>8 Million views</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21l-1.4-1.3C5.4 15 2 11.9 2 8.1 2 5 4.4 2.6 7.5 2.6c1.7 0 3.4.8 4.5 2.1 1.1-1.3 2.8-2.1 4.5-2.1C19.6 2.6 22 5 22 8.1c0 3.8-3.4 6.9-8.6 11.6z"/></svg>354,000 likes</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3C6.5 3 2 6.9 2 11.6c0 2.4 1.2 4.6 3.1 6.1L4.3 21l4-1.9c1.2.4 2.4.6 3.7.6 5.5 0 10-3.9 10-8.6S17.5 3 12 3z"/></svg>6,715 comments</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>402,000 shares</li>
+      </ul>
+      <p class="case-ig"><a href="https://www.instagram.com/hanocrypto/" target="_blank" rel="noopener">View on Instagram</a></p>
     </div>
   </div>
-
-  <section class="case-sec">
-    <p class="case-ig"><a href="https://www.instagram.com/hanocrypto/" target="_blank" rel="noopener">View on Instagram</a></p>
-  </section>
 
   <section class="case-sec">
     <h2>The One Minute Storytelling Format</h2>
@@ -242,18 +247,24 @@
 
   <section class="case-sec case-post">
     <h2>Trump's Planned Crash</h2>
-    <p class="case-metrics">900k views &middot; 46,500 likes &middot; 1,170 comments</p>
   </section>
 
-  <div class="gallery" data-gallery aria-roledescription="carousel" aria-label="Trump's Planned Crash">
-    <div class="gallery-track" data-gallery-track>
-      <figure class="slide slide-tall"><video src="../assets/video/work/hano-crypto/trumps-planned-crash.mp4" data-audio poster="../assets/img/work/hano-crypto/trumps-planned-crash-poster.jpg" muted loop playsinline preload="none" aria-label="Trump's Planned Crash — Hano Crypto video"></video></figure>
+  <!-- New template: clip on the left, engagement and the Instagram link beside it. -->
+  <div class="case-feature">
+    <div class="gallery" data-gallery aria-roledescription="carousel" aria-label="Trump's Planned Crash">
+      <div class="gallery-track" data-gallery-track>
+        <figure class="slide slide-tall"><video src="../assets/video/work/hano-crypto/trumps-planned-crash.mp4" data-audio poster="../assets/img/work/hano-crypto/trumps-planned-crash-poster.jpg" muted loop playsinline preload="none" aria-label="Trump's Planned Crash — Hano Crypto video"></video></figure>
+      </div>
+    </div>
+    <div class="case-feature-copy">
+      <ul class="case-metric-list" aria-label="Engagement">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5C6.5 5 2.7 9.1 1.5 12c1.2 2.9 5 7 10.5 7s9.3-4.1 10.5-7C21.3 9.1 17.5 5 12 5zm0 11a4 4 0 110-8 4 4 0 010 8z"/></svg>900k views</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21l-1.4-1.3C5.4 15 2 11.9 2 8.1 2 5 4.4 2.6 7.5 2.6c1.7 0 3.4.8 4.5 2.1 1.1-1.3 2.8-2.1 4.5-2.1C19.6 2.6 22 5 22 8.1c0 3.8-3.4 6.9-8.6 11.6z"/></svg>46,500 likes</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3C6.5 3 2 6.9 2 11.6c0 2.4 1.2 4.6 3.1 6.1L4.3 21l4-1.9c1.2.4 2.4.6 3.7.6 5.5 0 10-3.9 10-8.6S17.5 3 12 3z"/></svg>1,170 comments</li>
+      </ul>
+      <p class="case-ig"><a href="https://www.instagram.com/hanocrypto/" target="_blank" rel="noopener">View on Instagram</a></p>
     </div>
   </div>
-
-  <section class="case-sec">
-    <p class="case-ig"><a href="https://www.instagram.com/hanocrypto/" target="_blank" rel="noopener">View on Instagram</a></p>
-  </section>
 
   <section class="case-sec">
     <h2>The Scripting Formula</h2>
@@ -274,8 +285,8 @@
   <!-- The two Instagram analytics panels the frame sets side by side. -->
   <div class="gallery" data-gallery aria-roledescription="carousel" aria-label="Instagram analytics for War against China">
     <div class="gallery-track" data-gallery-track>
-      <figure class="slide slide-tall"><img src="../assets/img/work/hano-crypto/analytics-1.jpg" alt="Instagram insights: 8,277,774 views, 5,539,897 accounts reached, 53s average watch time, 55,778 follows" loading="lazy"></figure>
-      <figure class="slide slide-tall"><img src="../assets/img/work/hano-crypto/analytics-2.jpg" alt="Instagram retention graph and traffic breakdown: 77.5% Reels tab, 6.4% Explore" loading="lazy"></figure>
+      <figure style="--ar:.5641;--row:1.6923;--n:3" class="slide slide-tall"><img src="../assets/img/work/hano-crypto/analytics-1.jpg" alt="Instagram insights: 8,277,774 views, 5,539,897 accounts reached, 53s average watch time, 55,778 follows" loading="lazy"></figure>
+      <figure style="--ar:.5641;--row:1.6923;--n:3" class="slide slide-tall"><img src="../assets/img/work/hano-crypto/analytics-2.jpg" alt="Instagram retention graph and traffic breakdown: 77.5% Reels tab, 6.4% Explore" loading="lazy"></figure>
     </div>
   </div>
 
@@ -334,7 +345,7 @@
 <!-- ============ CTA ============ -->
 <section class="cta" id="contact">
   <div class="cta-glow" aria-hidden="true"></div>
-  <h2 class="cta-title">Let's bring your<br>vision to life</h2>
+  <h2 class="cta-title">Let's bring your <br>vision to life</h2>
   <a class="cta-bar" href="#contact" data-calendly>Let's talk</a>
 </section>
 

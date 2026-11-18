@@ -115,7 +115,7 @@
 }
 </script>
 </head>
-<body class="case-body">
+<body class="case-body case-page">
 
 <!-- ============ CALENDLY BOOKING MODAL ============ -->
 <!-- Same modal as the landing page; main.js wires any [data-calendly] trigger.
@@ -167,26 +167,23 @@
 </nav>
 
 <!-- ============ CASE STUDY ============ -->
-<article class="case">
+<article class="case case-study">
 
-  <!-- Logomark links home, as the frame draws it top-left -->
-  <a class="case-home" href="../index.html" aria-label="Hano Studios — back to home">
-    <img src="../assets/logo/logomark_white.png" alt="">
-  </a>
-
-  <!-- Only the logo row and "Why It Matters" are two-track grids; every other
-       section is a .case-sec indented to the copy column. See CLAUDE.md. -->
-  <header class="case-row">
-    <div class="case-brand">
-      <img class="case-logo" src="../assets/img/clients/kalshi.png" alt="Kalshi">
-      <p class="case-kicker">Ad + Social Campaign</p>
-    </div>
-
-    <div class="case-intro">
-      <h1 class="sr-only">Kalshi — crypto video content and distribution by Hano Studios</h1>
-      <p class="case-lead">We create and amplify crypto video content for Kalshi through one of the largest crypto communities on Instagram.</p>
+  <!-- New case-study template: a banner pairing the client's mark with ours
+       (ours links home), then the whole document in one centred column. -->
+  <header class="case-banner">
+    <p class="case-banner-label">Case Study</p>
+    <div class="case-banner-marks">
+      <img class="case-banner-client" src="../assets/img/clients/kalshi.png" alt="Kalshi">
+      <span class="case-banner-x" aria-hidden="true">&times;</span>
+      <a class="case-banner-home" href="../index.html" aria-label="Hano Studios — back to home"><img src="../assets/logo/logo_full_white.png" alt=""></a>
     </div>
   </header>
+
+  <div class="case-intro">
+    <h1 class="sr-only">Kalshi — crypto video content and distribution by Hano Studios</h1>
+    <p class="case-lead">We create and amplify crypto video content for Kalshi through one of the largest crypto communities on Instagram.</p>
+  </div>
 
   <section class="case-sec">
     <h2>Overview</h2>
@@ -216,25 +213,24 @@
     <p>Each video takes a live crypto story and frames it the way our audience already expects: tight, cinematic, and built to be watched to the end.</p>
   </section>
 
-  <!-- One clip, as the frame draws it: a single 9:16 phone-format video with the
-       Instagram link beneath. data-gallery still wires play/pause on visibility. -->
-  <div class="gallery" data-gallery aria-roledescription="carousel" aria-label="Kalshi crypto video content">
-    <div class="gallery-track" data-gallery-track>
-      <figure class="slide slide-tall"><video src="../assets/video/work/kalshi/xrp-bank.mp4" data-audio poster="../assets/img/work/kalshi/xrp-bank-poster.jpg" muted loop playsinline preload="none" aria-label="XRP Bank — Kalshi crypto video produced and published by Hano Crypto"></video></figure>
+  <!-- The newer template: one 9:16 clip with its copy and the Instagram link
+       beside it. data-gallery still wires play/pause and the sound toggle. -->
+  <div class="case-feature">
+    <div class="gallery" data-gallery aria-roledescription="carousel" aria-label="Kalshi crypto video content">
+      <div class="gallery-track" data-gallery-track>
+        <figure class="slide slide-tall"><video src="../assets/video/work/kalshi/xrp-bank.mp4" data-audio poster="../assets/img/work/kalshi/xrp-bank-poster.jpg" muted loop playsinline preload="none" aria-label="XRP Bank — Kalshi crypto video produced and published by Hano Crypto"></video></figure>
+      </div>
+    </div>
+    <div class="case-feature-copy">
+      <p>Cross-posting between Hano Crypto and @kalshicrypto compounds the effect. Our audience drives the initial views and engagement; that signal pushes each video deeper into the algorithm; and the attention flows back toward Kalshi's own account.</p>
+      <p class="case-ig"><a href="https://www.instagram.com/kalshicrypto/" target="_blank" rel="noopener">View on Instagram</a></p>
     </div>
   </div>
 
-  <section class="case-sec">
-    <p class="case-ig"><a href="https://www.instagram.com/kalshicrypto/" target="_blank" rel="noopener">View on Instagram</a></p>
-    <p>Cross-posting between Hano Crypto and @kalshicrypto compounds the effect. Our audience drives the initial views and engagement; that signal pushes each video deeper into the algorithm; and the attention flows back toward Kalshi's own account.</p>
-  </section>
-
-  <section class="case-row case-why">
-    <p class="case-label">Why It Matters</p>
-    <div>
-      <p class="case-why-lead">The story here isn't a single viral spike — it's consistency. Across the first eight videos, every one landed in five figures. For a brand-new crypto account, that's reliable reach from the start, and it compounds as the partnership continues and the @kalshicrypto audience grows.</p>
-      <p>One of the most important names in regulated trading, a $22 billion exchange, chose us to create and run its crypto content. We give Kalshi a dependable way to reach crypto audiences on demand, in a consistent style, through a community we've spent years building. The partnership is ongoing, and the reach grows with it.</p>
-    </div>
+  <section class="case-sec case-why">
+    <h2>Why It Matters</h2>
+    <p class="case-why-lead">The story here isn't a single viral spike — it's consistency. Across the first eight videos, every one landed in five figures. For a brand-new crypto account, that's reliable reach from the start, and it compounds as the partnership continues and the @kalshicrypto audience grows.</p>
+    <p>One of the most important names in regulated trading, a $22 billion exchange, chose us to create and run its crypto content. We give Kalshi a dependable way to reach crypto audiences on demand, in a consistent style, through a community we've spent years building. The partnership is ongoing, and the reach grows with it.</p>
   </section>
 
 
@@ -243,7 +239,7 @@
 <!-- ============ CTA ============ -->
 <section class="cta" id="contact">
   <div class="cta-glow" aria-hidden="true"></div>
-  <h2 class="cta-title">Let's bring your<br>vision to life</h2>
+  <h2 class="cta-title">Let's bring your <br>vision to life</h2>
   <a class="cta-bar" href="#contact" data-calendly>Let's talk</a>
 </section>
 

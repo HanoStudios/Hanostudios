@@ -12,6 +12,7 @@
 
   /* Derived neutrals */
   --ink-90:    rgba(255,255,255,.90);
+  --ink-75:    rgba(255,255,255,.75);
   --ink-60:    rgba(255,255,255,.60);
   --ink-40:    rgba(255,255,255,.40);
   --ink-14:    rgba(255,255,255,.14);
@@ -1314,6 +1315,54 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
 }
 .case-ig a:hover{ color:var(--frost); }
 
+/* A single 9:16 clip with its copy beside it rather than centred above it —
+   the newer case-study frame (the "Case Study - Kalshi" template). The clip is
+   still a [data-gallery], so main.js keeps wiring play/pause and the sound
+   toggle; this only switches off the gallery's own bleed grid so it can sit as
+   the left cell, at the copy column's indent like any .case-sec. */
+.case-feature{
+  display:grid;
+  grid-template-columns:auto minmax(0, 1fr);
+  gap:clamp(22px,3vw,44px);
+  align-items:start;
+  margin:0 0 clamp(30px,3.6vw,52px) var(--indent);
+  max-width:calc(100% - var(--indent));
+}
+.case-feature .gallery{
+  display:block;
+  margin:0;
+  padding:0;
+}
+.case-feature .gallery-track{ margin-right:0; }
+/* Roughly a third of the copy column, as the frame draws it. Needs the extra
+   class to out-specify the phone rule `.slide.slide-tall` below. */
+.case-feature .slide.slide-tall{ height:clamp(380px,32vw,520px); }
+.case-feature-copy{ padding-top:clamp(4px,1vw,14px); max-width:46ch; }
+.case-feature-copy p{
+  font-size:clamp(13px,1.15vw,16px);
+  line-height:1.62;
+  color:var(--ink-90);
+}
+.case-feature-copy .case-ig{ margin:clamp(22px,3vw,40px) 0 0; }
+/* The engagement figures beside a post's clip, one per line with its icon. */
+.case-metric-list{
+  display:grid;
+  gap:clamp(8px,.9vw,12px);
+  margin:0;
+  padding:0;
+  list-style:none;
+  font-size:clamp(15px,1.45vw,20px);
+  letter-spacing:-.02em;
+  color:var(--ink-90);
+}
+.case-metric-list li{ display:flex; align-items:center; gap:10px; }
+.case-metric-list svg{
+  flex:none;
+  width:.8em;
+  height:.8em;
+  fill:var(--ink-40);
+}
+
 /* The global rule is `a{color:inherit;text-decoration:none}`, which is right for
    nav and cards but leaves the imprint's email, phone and ODR links looking like
    plain text — on a legal page those have to be visibly actionable. Same
@@ -1546,6 +1595,7 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   .case-board-frame{ --board-mask-h:30px; }
   .case-row > :last-child{ max-width:none; }
   .case-sec{ margin-left:0; max-width:none; }
+  .case-feature{ margin-left:0; max-width:none; }
   .case-brand{ padding-top:0; }
   /* Single column, so the brand goes back into flow above the copy. Left
      absolute it would sit on top of the intro text: there is no margin column
@@ -1577,7 +1627,159 @@ button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; 
   }
   .slide.slide-tall video,
   .slide.slide-tall img{ width:100%; height:auto; }
+  /* Side by side leaves the copy ~120px wide on a phone: stack it under the
+     clip, which takes the same phone-scale width as any other tall slide. */
+  .case-feature{ grid-template-columns:1fr; gap:20px; }
+  .case-feature .slide.slide-tall{
+    height:auto;
+    width:min(78vw, 340px);
+  }
+  .case-feature-copy{ padding-top:0; max-width:none; }
 }
+
+/* ---------- New case-study template (2026-11-18) ----------
+   The designer's current frames ("Case Study - ByBit / Kalshi / Hano Crypto")
+   replace the indented two-track document with ONE centred column: a banner
+   pairing the client's mark with ours, then every heading, paragraph, tile and
+   gallery left-aligned in that column. Scoped to .case-study (the five work/
+   pages) so the legal pages and /book, which reuse .case, are untouched. Comes
+   after the media queries above so equal-specificity rules win here. */
+.case-study{
+  --colw:820px;
+  padding-top:clamp(84px,11vh,120px);
+}
+.case-study > *{
+  max-width:var(--colw);
+  margin-left:auto !important;
+  margin-right:auto !important;
+}
+
+.case-banner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  min-height:clamp(46px,4.4vw,58px);
+  padding:0 clamp(14px,1.8vw,22px);
+  background:linear-gradient(100deg, #5a5a5a 0%, #2b2b2b 30%, #141414 62%, #0f0f0f 100%);
+}
+.case-banner-label{
+  font-size:clamp(12px,1.05vw,15px);
+  font-weight:500;
+  letter-spacing:.01em;
+  text-transform:uppercase;
+}
+.case-banner-marks{ display:flex; align-items:center; gap:clamp(8px,.9vw,12px); }
+.case-banner-client{ height:clamp(13px,1.2vw,17px); width:auto; max-width:120px; object-fit:contain; }
+.case-banner-round{ height:clamp(20px,1.9vw,26px); }
+.case-banner-x{ font-size:11px; color:var(--ink-60); }
+.case-banner-home img{ display:block; height:clamp(10px,.95vw,13px); width:auto; }
+
+.case-study .case-intro{ margin-top:clamp(24px,2.6vw,34px); margin-bottom:clamp(30px,3.4vw,46px); }
+.case-study .case-intro h1{ font-size:clamp(22px,2.3vw,31px); letter-spacing:-.03em; }
+.case-study .case-intro h1 + .case-lead{ margin-top:8px; }
+.case-study .case-lead{ margin-top:0; color:var(--ink-75); }
+
+.case-study .case-sec{ margin-bottom:clamp(30px,3.4vw,46px); }
+.case-study .case-sec h2{ margin-bottom:10px; font-size:clamp(20px,2vw,27px); font-weight:400; }
+.case-study .case-sec p{ color:var(--ink-75); }
+.case-study .case-sec p + p{ margin-top:12px; }
+
+/* Stats as four soft tiles, 2x2 at every width, numerals in Aleo as drawn. */
+.case-study .case-stats{
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:clamp(8px,1vw,12px);
+  max-width:560px;
+  margin-top:14px;
+  border-top:0;
+}
+.case-study .case-stats > div{
+  padding:clamp(30px,3.4vw,44px) clamp(10px,1vw,14px) clamp(10px,1vw,14px);
+  border:0;
+  background:linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.012) 70%);
+}
+.case-study .case-stats dt{
+  font-family:'Aleo', Georgia, serif;
+  font-size:clamp(20px,2.1vw,29px);
+  font-weight:300;
+  letter-spacing:0;
+  color:var(--ink-90);
+}
+.case-study .case-stats dd{
+  margin-top:6px;
+  font-size:clamp(9px,.8vw,11px);
+  letter-spacing:.02em;
+  color:var(--ink-60);
+}
+
+/* "Why It Matters" is an ordinary section now: a white lead, a smaller note. */
+.case-study .case-why .case-why-lead{
+  font-size:clamp(14px,1.2vw,17px) !important;
+  line-height:1.6 !important;
+  letter-spacing:-.01em;
+}
+.case-study .case-why .case-why-lead + p{
+  margin-top:14px;
+  font-size:clamp(11px,.95vw,13px);
+  color:var(--ink-60);
+}
+
+/* Single-clip posts: no indent any more, and a larger, brighter link. */
+.case-study .case-feature{ max-width:var(--colw); }
+.case-study .case-ig a{
+  font-size:clamp(11px,1vw,13px);
+  letter-spacing:.02em;
+  color:var(--ink-90);
+}
+
+/* The Milanote board fills the column like the frame's white panel. */
+.case-study .case-board-frame{ width:100%; }
+
+/* Galleries become static grids in the column, as the frames lay them out.
+   Each slide carries --ar (its aspect), --row (the aspect sum of a full row)
+   and --n (slides per full row), so every row resolves to one shared height.
+   Phones keep the swipe strip, where a three-across row would be stamps. */
+@media (min-width:601px){
+  .case-study .gallery{
+    display:block;
+    margin-bottom:clamp(30px,3.4vw,46px);
+    padding:0;
+  }
+  .case-study .gallery-track{
+    --g:clamp(8px,1vw,12px);
+    flex-wrap:wrap;
+    gap:var(--g);
+    margin-right:0;
+    overflow:visible;
+    scroll-snap-type:none;
+  }
+  .case-study .gallery.is-static .gallery-track{ justify-content:flex-start; }
+  .case-study .gallery .slide[style*="--ar"]{
+    height:auto;
+    width:calc((100% - (var(--n) - 1) * var(--g)) * var(--ar) / var(--row) - .5px);
+    aspect-ratio:var(--ar);
+    border-radius:0;
+  }
+  .case-study .gallery .slide[style*="--ar"] img,
+  .case-study .gallery .slide[style*="--ar"] video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .case-study .gallery.is-static .gallery-foot{ justify-content:flex-start; }
+}
+
+/* The frames end on the CTA and its white bar, with no Aurora footer. The
+   legal line stays (imprint, privacy and cookie settings have to be reachable
+   from every page), on Void Black. */
+/* The frames draw this block about a third the height of the landing page's. */
+.case-page .cta{ min-height:clamp(300px,40svh,440px); }
+.case-page .cta-title{ font-size:clamp(30px,4.4vw,60px); }
+.case-page .cta-title br{ display:none; }
+.case-page .cta-bar:hover{ background:var(--frost); color:var(--void); }
+.case-page .footer{ padding-top:0; background:var(--void); }
+.case-page .footer-top,
+.case-page .footer-mark{ display:none; }
 
 /* ============================================================
    CTA

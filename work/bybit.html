@@ -115,7 +115,7 @@
 }
 </script>
 </head>
-<body class="case-body">
+<body class="case-body case-page">
 
 <!-- ============ CALENDLY BOOKING MODAL ============ -->
 <!-- Same modal as the landing page; main.js wires any [data-calendly] trigger.
@@ -167,25 +167,23 @@
 </nav>
 
 <!-- ============ CASE STUDY ============ -->
-<article class="case">
+<article class="case case-study">
 
-  <!-- Logomark links home, as the frame draws it top-left -->
-  <a class="case-home" href="../index.html" aria-label="Hano Studios — back to home">
-    <img src="../assets/logo/logomark_white.png" alt="">
-  </a>
-
-  <!-- Every row shares the same two tracks: label/heading left, content right. -->
-  <header class="case-row">
-    <div class="case-brand">
-      <img class="case-logo" src="../assets/img/clients/bybit.svg" alt="Bybit">
-      <p class="case-kicker">Ad + Social Campaign</p>
-    </div>
-
-    <div class="case-intro">
-      <h1>Two campaigns. One global brand.</h1>
-      <p class="case-lead">We gave Bybit EU the visuals for their three-year reign over Stockholm's most historic tennis tournament and the ad campaign that put the Bybit Card in front of Europe.</p>
+  <!-- New case-study template: a banner pairing the client's mark with ours
+       (ours links home), then the whole document in one centred column. -->
+  <header class="case-banner">
+    <p class="case-banner-label">Case Study</p>
+    <div class="case-banner-marks">
+      <img class="case-banner-client" src="../assets/img/clients/bybit.svg" alt="Bybit">
+      <span class="case-banner-x" aria-hidden="true">&times;</span>
+      <a class="case-banner-home" href="../index.html" aria-label="Hano Studios — back to home"><img src="../assets/logo/logo_full_white.png" alt=""></a>
     </div>
   </header>
+
+  <div class="case-intro">
+    <h1>Two campaigns. One global brand.</h1>
+    <p class="case-lead">We gave Bybit EU the visuals for their three-year reign over Stockholm's most historic tennis tournament and the ad campaign that put the Bybit Card in front of Europe.</p>
+  </div>
 
   <section class="case-sec">
     <h2>Overview</h2>
@@ -218,10 +216,10 @@
   <!-- Stockholm Open stills. data-gallery makes main.js wire the arrows/dots. -->
   <div class="gallery" data-gallery aria-roledescription="carousel" aria-label="Bybit Stockholm Open campaign stills">
     <div class="gallery-track" data-gallery-track>
-      <figure class="slide"><img src="../assets/img/work/bybit/stockholm-4.jpg" alt="Get your tickets before everyone else — Bybit Card with the Bybit Stockholm Open identity over a packed arena" loading="lazy"></figure>
-      <figure class="slide"><img src="../assets/img/work/bybit/stockholm-1.jpg" alt="Your access starts with the Bybit Card" loading="lazy"></figure>
-      <figure class="slide"><img src="../assets/img/work/bybit/stockholm-2.jpg" alt="Få första tillgång till Stockholm Open — Swedish edit of the presale campaign" loading="lazy"></figure>
-      <figure class="slide"><img src="../assets/img/work/bybit/stockholm-3.jpg" alt="Bybit Stockholm Open campaign still, vertical placement" loading="lazy"></figure>
+      <figure style="--ar:1;--row:2.3625;--n:3" class="slide"><img src="../assets/img/work/bybit/stockholm-1.jpg" alt="Your access starts with the Bybit Card" loading="lazy"></figure>
+      <figure style="--ar:.8;--row:2.3625;--n:3" class="slide"><img src="../assets/img/work/bybit/stockholm-2.jpg" alt="Få första tillgång till Stockholm Open — Swedish edit of the presale campaign" loading="lazy"></figure>
+      <figure style="--ar:.5625;--row:2.3625;--n:3" class="slide"><img src="../assets/img/work/bybit/stockholm-3.jpg" alt="Bybit Stockholm Open campaign still, vertical placement" loading="lazy"></figure>
+      <figure style="--ar:1.7778;--row:1.7778;--n:1" class="slide"><img src="../assets/img/work/bybit/stockholm-4.jpg" alt="Get your tickets before everyone else — Bybit Card with the Bybit Stockholm Open identity over a packed arena" loading="lazy"></figure>
     </div>
     <div class="gallery-foot">
       <div class="gallery-arrows">
@@ -245,10 +243,10 @@
        at all, so main.js gives this gallery no sound toggle. -->
   <div class="gallery" data-gallery aria-roledescription="carousel" aria-label="Bybit Card campaign films">
     <div class="gallery-track" data-gallery-track>
-      <figure class="slide"><video src="../assets/video/work/bybit/card-1.mp4" poster="../assets/img/work/bybit/card-1-poster.jpg" muted loop playsinline preload="none" aria-label="Lev kryptolivet med Bybit Card — Swedish lifestyle spot"></video></figure>
-      <figure class="slide"><video src="../assets/video/work/bybit/card-4.mp4" poster="../assets/img/work/bybit/card-4-poster.jpg" muted loop playsinline preload="none" aria-label="Bybit Card campaign film, landscape placement"></video></figure>
-      <figure class="slide"><video src="../assets/video/work/bybit/card-2.mp4" poster="../assets/img/work/bybit/card-2-poster.jpg" muted loop playsinline preload="none" aria-label="Bybit Card campaign film, vertical placement"></video></figure>
-      <figure class="slide"><video src="../assets/video/work/bybit/card-3.mp4" poster="../assets/img/work/bybit/card-3-poster.jpg" muted loop playsinline preload="none" aria-label="Bybit Card campaign film, feed placement"></video></figure>
+      <figure style="--ar:.8;--row:2.5778;--n:2" class="slide"><video src="../assets/video/work/bybit/card-1.mp4" poster="../assets/img/work/bybit/card-1-poster.jpg" muted loop playsinline preload="none" aria-label="Lev kryptolivet med Bybit Card — Swedish lifestyle spot"></video></figure>
+      <figure style="--ar:1.7778;--row:2.5778;--n:2" class="slide"><video src="../assets/video/work/bybit/card-4.mp4" poster="../assets/img/work/bybit/card-4-poster.jpg" muted loop playsinline preload="none" aria-label="Bybit Card campaign film, landscape placement"></video></figure>
+      <figure style="--ar:.5625;--row:2.5778;--n:2" class="slide"><video src="../assets/video/work/bybit/card-2.mp4" poster="../assets/img/work/bybit/card-2-poster.jpg" muted loop playsinline preload="none" aria-label="Bybit Card campaign film, vertical placement"></video></figure>
+      <figure style="--ar:.8;--row:2.5778;--n:2" class="slide"><video src="../assets/video/work/bybit/card-3.mp4" poster="../assets/img/work/bybit/card-3-poster.jpg" muted loop playsinline preload="none" aria-label="Bybit Card campaign film, feed placement"></video></figure>
     </div>
     <div class="gallery-foot">
       <div class="gallery-arrows">
@@ -268,8 +266,8 @@
 
   <div class="gallery" data-gallery aria-roledescription="carousel" aria-label="Bybit EU social content">
     <div class="gallery-track" data-gallery-track>
-      <figure class="slide"><video src="../assets/video/work/bybit/social-1.mp4" data-audio poster="../assets/img/work/bybit/social-1-poster.jpg" muted loop playsinline preload="none" aria-label="Bybit EU talking-head clip rebuilt in motion"></video></figure>
-      <figure class="slide"><video src="../assets/video/work/bybit/social-2.mp4" data-audio poster="../assets/img/work/bybit/social-2-poster.jpg" muted loop playsinline preload="none" aria-label="Bybit app UI animation"></video></figure>
+      <figure style="--ar:.5625;--row:1.6875;--n:3" class="slide"><video src="../assets/video/work/bybit/social-1.mp4" data-audio poster="../assets/img/work/bybit/social-1-poster.jpg" muted loop playsinline preload="none" aria-label="Bybit EU talking-head clip rebuilt in motion"></video></figure>
+      <figure style="--ar:.5625;--row:1.6875;--n:3" class="slide"><video src="../assets/video/work/bybit/social-2.mp4" data-audio poster="../assets/img/work/bybit/social-2-poster.jpg" muted loop playsinline preload="none" aria-label="Bybit app UI animation"></video></figure>
     </div>
     <div class="gallery-foot">
       <div class="gallery-arrows">
@@ -282,12 +280,10 @@
 
   <!-- Frame 181 sets this one apart: a small left-hand label with the closing
        argument set large beside it. -->
-  <section class="case-row case-why">
-    <p class="case-label">Why It Matters</p>
-    <div>
-      <p class="case-why-lead">Bybit is where everything we'd built for ourselves got put to the test. With Hano Crypto, we'd already proven we understand this space deeply enough to make it land with hardened traders and total newcomers in the same breath. Bybit asked the same question at a far bigger scale — a global brand, a financial product in millions of hands, two languages, every platform.</p>
-      <p>Because the thread never changes: crypto expertise plus genuine craft. Designers who don't know crypto make work that looks beautiful and says nothing. People who only know crypto make work that's accurate and instantly forgotten. The rare thing is both at once — and that's the entire reason we exist.</p>
-    </div>
+  <section class="case-sec case-why">
+    <h2>Why It Matters</h2>
+    <p class="case-why-lead">Bybit is where everything we'd built for ourselves got put to the test. With Hano Crypto, we'd already proven we understand this space deeply enough to make it land with hardened traders and total newcomers in the same breath. Bybit asked the same question at a far bigger scale — a global brand, a financial product in millions of hands, two languages, every platform.</p>
+    <p>Because the thread never changes: crypto expertise plus genuine craft. Designers who don't know crypto make work that looks beautiful and says nothing. People who only know crypto make work that's accurate and instantly forgotten. The rare thing is both at once — and that's the entire reason we exist.</p>
   </section>
 
 
@@ -296,7 +292,7 @@
 <!-- ============ CTA ============ -->
 <section class="cta" id="contact">
   <div class="cta-glow" aria-hidden="true"></div>
-  <h2 class="cta-title">Let's bring your<br>vision to life</h2>
+  <h2 class="cta-title">Let's bring your <br>vision to life</h2>
   <a class="cta-bar" href="#contact" data-calendly>Let's talk</a>
 </section>
 

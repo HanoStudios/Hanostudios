@@ -205,6 +205,29 @@ content width does not tower over the copy either side.
 `.slide-board` needs `.slide.slide-board` specificity — see above; that trap
 still applies if you put the still back.
 
+**All five case studies use the NEW template (2026-11-18, `article.case.case-study`
++ `body.case-page`).** This supersedes the frame-181 "indented document" notes
+above for those pages (legal/privacy/book still use the old `.case` layout):
+one centred column (`--colw`), a gradient `.case-banner` ("CASE STUDY" left;
+client mark × Hano Studios logo right, ours linking home — there is no
+`.case-home` or kicker any more), stats as soft 2x2 tiles with Aleo numerals
+(the designer's frames draw them that way), "Why It Matters" as an ordinary
+`.case-sec`, galleries as static grids on >=600px (each slide carries
+`--ar`/`--row`/`--n` inline so a row resolves to one height; the selector is
+`.slide[style*="--ar"]` because GSAP writes inline styles onto every slide), a
+compact CTA, and **no Aurora footer** — only the legal line on Void Black, kept
+because the imprint/privacy/cookie links must be reachable from every page.
+The user called the purple footer "the old design" on these pages.
+
+**Single-clip posts use `.case-feature` (the newer "Case Study - Kalshi"
+template, 2026-11-18):** the 9:16 clip on the left, and beside it a
+`.case-metric-list` (one figure per line with an eye/heart/comment/share icon)
+and/or copy, then the `.case-ig` link. Used by Kalshi's XRP Bank clip and both
+Hano Crypto posts. The clip is still a `[data-gallery]` inside it, so main.js
+wiring is unchanged; `.case-feature .gallery` just switches off the bleed grid.
+Stacks below 600px. Bybit's multi-slide strips stay as galleries. Kalshi has no
+per-post metrics yet, so its right column carries the cross-posting paragraph.
+
 Hano Crypto's mark is the client's own artwork at
 `assets/img/clients/hano-crypto.png`, built from `Logowhite.PNG` in the repo
 root — a purple roundel with black type. Two earlier attempts (a raster crop off
